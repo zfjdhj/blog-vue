@@ -2,5 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import store from './store'
 import router from './router'
+import SuiVue from 'semantic-ui-vue';
+// import $ from 'jquery'
 
-createApp(App).use(router).use(store).mount('#app')
+// prototype.$
+createApp(App).use(router).use(store).use(SuiVue).mount('#app')

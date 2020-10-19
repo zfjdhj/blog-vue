@@ -1,4 +1,5 @@
 <template>
+  <link rel="stylesheet" href="../../static/css/custom.css">
   <nav class="ui inverted attached segment custom-padded-tb-mini custom-shadow-small">
     <div class="ui container">
       <div class="ui inverted secondary stackable menu">
@@ -25,9 +26,13 @@
 </template>
 
 <script>
-
+// import $ from "jquery"
+import "../../static/css/custom.css"
 export default {
-name: "header"
+name: "header",
+  created() {
+
+  }
 }
 </script>
 

@@ -10,11 +10,13 @@
 </template>
 
 <script>
-// import $ from "../static/js/jquery-3.4.1.min.js"
+import $ from "jquery"
 // console.log($)
 export default {
   name: 'App',
-  // $:"$"
+  created() {
+    console.log($)
+  }
 }
 </script>
 

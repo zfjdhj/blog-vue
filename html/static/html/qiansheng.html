@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>炉石传说-胜场展示</title>
+</head>
+<body>
+
+    <div id="container">
+        <div class="head"></div>
+        <div class="body">
+            <div class="data">
+                <h3>大号数据</h3>
+                <table >
+<!--                    <table border="1" style="border-color:#db6800" cellspacing="0">-->
+                    <!--        <tr>-->
+                    <!--            <th></th>-->
+                    <!--            <th></th>-->
+                    <!--            <th></th>-->
+                    <!--        </tr>-->
+                    <tr>
+                        <td id="1">
+<!--                                            <img style="padding-top:20px" weight=150px height=170px src="/html/image/lscs/千胜-战.png" alt="">-->
+<!--                                            <br>-->
+<!--                                            <div style="position:relative;">-->
+<!--                                                <img style="position: absolute ;width: 150px" src="/html/image/lscs/bg_popup_progress_empty.png"  alt="">-->
+<!--                                                <div style="position: absolute ; width: 50px;overflow:hidden">-->
+<!--                                                    <img style="width: 150px;" src="/html/image/lscs/bg_popup_progress_going.png"  alt="">-->
+<!--                                                </div>-->
+<!--                                                <span style="position: absolute;left:45px;z-index:100;aligned:center;color:#ffffff;font-size:12px">胜场/1000</span>-->
+<!--                                            </div>-->
+                            1</td>
+                        <td id="2">2</td>
+                        <td id="3">3</td>
+                    </tr>
+                    <tr>
+                        <td id="4">4</td>
+                        <td id="5">5</td>
+                        <td id="6">6</td>
+                    </tr>
+                    <tr>
+                        <td id="7">7</td>
+                        <td id="8">8</td>
+                        <td id="9">9</td>
+                    </tr>
+                </table>
+                <h3>小号数据</h3>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td id="10">1
+                            <!--                <img src="/html/image/lscs/千胜-战.jpg" alt="">-->
+                            <!--                <span>胜场</span>-->
+                        </td>
+                        <td id="11">2</td>
+                        <td id="12">3</td>
+                    </tr>
+                    <tr>
+                        <td id="13">4</td>
+                        <td id="14">5</td>
+                        <td id="15">6</td>
+                    </tr>
+                    <tr>
+                        <td id="16">7</td>
+                        <td id="17">8</td>
+                        <td id="18">9</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="foot"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+                        $(function () {
+                    //获取json
+var json=null;
+json=$.ajax({url:"/json/tool/lscs/qiansheng.json",
+    dataType: "json",
+     async:false ,
+    success:function(result){
+//                userCount = $(result).filter(".custom-container-small.custom-padded-tb-big").get(0);
+//                   console.log(result);
+                      }
+}).responseText;
+// console.log(json);
+json=JSON.parse(json);
+console.log('千胜数据更新时间：'+json["update"]);
+var dahaodata= json["大号"]["data"][0];
+var xiaohaodata= json["小号"]["data"][0];
+// console.log('大号数据')
+var i=1;
+if(document.getElementById(i) != null){
+    for (var item in dahaodata) {
+    if(dahaodata[item] < 1000){
+        console.log("<1000")
+        var bfb=dahaodata[item]/1000;
+        var show=150*bfb;
+        var showStr=dahaodata[item]+'/1000';
+        var imgType="普通";
+    } else {
+        console.log(">=1000")
+        var bfb=1;
+        var show=150;
+        console.log(show)
+        var showStr=dahaodata[item];
+        var imgType="千胜";
+    }
+    document.getElementById(i).innerHTML='<img style="padding-top:20px" width=150px height=170px src="/html/image/lscs/'+imgType+'-'+item+'.png" alt="">'+
+    '<br>'+
+    '<div style="position:relative;">'+
+    '<img style="position: absolute; width: 150px" src="/html/image/lscs/bg_popup_progress_empty.png"  alt="">'+
+    '<div style="position: absolute; width: '+show+'px;overflow:hidden">'+
+    '<img style="width: 150px;" src="/html/image/lscs/bg_popup_progress_going.png"  alt="">'+
+    '</div>'+
+    '<span style="position: absolute;left:45px;z-index:100;aligned:center;color:#ffffff;font-size:12px">'+showStr+'</span>'+
+    '</div>';
+//     console.log(document.getElementById(i));
+    document.getElementById(i).id="大号"+item;
+    i++;
+//        console.log(item+':'+dahaodata[item])
+   }
+}
+// console.log('小号数据')
+var i=10;
+if(document.getElementById(i) != null){
+    for (var item in xiaohaodata) {
+    if(xiaohaodata[item] <= 1000){
+        var bfb=xiaohaodata[item]/1000;
+        var show=150*bfb;
+        var showStr=xiaohaodata[item]+'/1000';
+        var imgType="普通";
+    } else {
+        var bfb=1;
+        var show=150;
+        var showStr=xiaohaodata[item];
+        var imgType="千胜";
+    }
+    document.getElementById(i).innerHTML='<img style="padding-top:20px" width=150px height=190px src="/html/image/lscs/'+imgType+'-'+item+'.png" alt="">'+
+    '<br>'+
+    '<div style="position:relative;">'+
+    '<img style="position: absolute; width: 150px" src="/html/image/lscs/bg_popup_progress_empty.png"  alt="">'+
+    '<div style="position: absolute; width: '+show+'px;overflow:hidden">'+
+    '<img style="width: 150px;" src="/html/image/lscs/bg_popup_progress_going.png"  alt="">'+
+    '</div>'+
+    '<span style="position: absolute;left:45px;z-index:100;aligned:center;color:#ffffff;font-size:12px">'+showStr+'</span>'+
+    '</div>'
+    document.getElementById(i).id="小号"+item;
+    i++;
+//        console.log(item+':'+dahaodata[item])
+   }
+}
+//设置背景
+var container=document.getElementById("container");
+container.style.backgroundImage="url('/html/image/lscs/bg2-body.png')";
+container.style.backgroundRepeat="repeat-y";
+container.style.position="relative";
+container.style.backgroundSize="contain";
+var data=document.getElementsByClassName("data")[0];
+// console.log(data);
+data.style.paddingTop="30px";
+data.style.paddingLeft="40px";
+data.style.paddingBottom="30px";
+var head=document.getElementsByClassName("head")[0];
+// console.log(head);
+head.style.backgroundImage="url('/html/image/lscs/bg-head.png')";
+head.style.backgroundRepeat="no-repeat";
+head.style.height="26px";
+head.style.width="703px";
+head.style.position="absolute";
+head.style.top="-12px";
+// head.style.left=1+'px';
+var foot=document.getElementsByClassName("foot")[0];
+foot.style.backgroundImage="url('/html/image/lscs/bg-bot.png')";
+foot.style.backgroundRepeat="no-repeat";
+foot.style.height="34px";
+foot.style.width="703px";
+foot.style.position="absolute";
+foot.style.top=container.offsetHeight-10+'px';
+                    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1440 @@
+body, html {
+    width: 100%;
+    height: 100%
+}
+
+a, body {
+    color: #666
+}
+
+a, ins {
+    text-decoration: none
+}
+
+#doc, #error, .f-btn input, .f-footer, .f-list, .hd {
+    text-align: center
+}
+
+.hd, .logo {
+    position: relative
+}
+
+.footer .item, .hd img {
+    float: left
+}
+
+.hd, .new {
+    clear: both
+}
+
+#ads_gdt .p2, .book_intr .p2 {
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow: hidden
+}
+
+#ads_gdt .p1, #ads_gdt .p2, .book_intr .p2, .hd, .mask, .new, .wifi_name {
+    overflow: hidden
+}
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, input, ins, kbd, label, legend, li, mark, menu, nav, object, ol, p, pre, q, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: 0;
+    font: inherit;
+    vertical-align: baseline
+}
+
+body, div, fieldset, form, h1, h2, h3, h4, h5, h6, html, p {
+    -webkit-text-size-adjust: none
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block
+}
+
+body {
+    font-family: arial, sans-serif;
+    font-size: 16px;
+    background: #f8f8f8
+}
+
+ol, ul {
+    list-style: none
+}
+
+blockquote, q {
+    quotes: none
+}
+
+blockquote:after, blockquote:before, q:after, q:before {
+    content: '';
+    content: none
+}
+
+del {
+    text-decoration: line-through
+}
+
+* {
+    tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    -ms-tap-highlight-color: transparent;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+#doc, #error {
+    margin: auto;
+    background: #fff;
+    padding: .15px 5% 0
+}
+
+#doc h1 {
+    font-size: 18px;
+    color: #676e89;
+    font-weight: 700
+}
+
+#doc p {
+    font-size: 10px;
+    padding: 10px 0
+}
+
+.logo {
+    background: #fff;
+    height: 23%;
+    padding: 5% 5% 0
+}
+
+.f-feedback {
+    margin: 8%;
+    color: #000
+}
+
+.f-title {
+    font-size: 18px
+}
+
+.f-list {
+    font-size: 0;
+    margin-top: 10px
+}
+
+.f-item {
+    display: inline-block;
+    width: 50%;
+    height: 120px;
+    font-size: 11px;
+    border: 1px solid #eee
+}
+
+.f-select {
+    background: url(../img/ico_feedback_5.png) bottom left no-repeat;
+    background-size: 18px
+}
+
+.f-item:nth-child(2) {
+    border-left: none
+}
+
+.f-item:nth-child(3) {
+    border-top: none
+}
+
+.f-item:nth-child(4) {
+    border-left: none;
+    border-top: none
+}
+
+.f-item img {
+    margin-top: 20px
+}
+
+.f-des {
+    margin-top: 10px
+}
+
+.f-input {
+    margin-top: 40px
+}
+
+.f-input input {
+    width: 100%;
+    border: 1px solid #eee;
+    padding: 15px;
+    font-size: 12px
+}
+
+.f-input-phone {
+    margin-top: 15px
+}
+
+.f-btn {
+    margin-top: 40px
+}
+
+.f-btn input {
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    font-size: 14px;
+    outline: 0;
+    -webkit-appearance: none;
+    border-radius: 2px
+}
+
+.f-btn-submit {
+    background: #09f;
+    color: #fff
+}
+
+.f-btn .disable, .f-btn input:hover {
+    opacity: .4
+}
+
+.f-btn-cancel {
+    margin-top: 10px;
+    background: #fff;
+    color: #000;
+    border: 1px solid #eee
+}
+
+.f-footer {
+    color: #aaa;
+    font-size: 12px;
+    margin-top: 10px
+}
+
+::-webkit-input-placeholder {
+    color: #ddd
+}
+
+:-moz-placeholder {
+    color: #ddd
+}
+
+::-moz-placeholder {
+    color: #ddd
+}
+
+:-ms-input-placeholder {
+    color: #ddd
+}
+
+.hd {
+    padding: 20px 10%;
+    background: #fff
+}
+
+.hd::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    background: #eee;
+    left: 10%;
+    right: 10%
+}
+
+.hd .right {
+    margin-left: 1rem;
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%)
+}
+
+#btnList, .btn-list .btn, .detail, .pay_list .item, .yo-tip {
+    text-align: center
+}
+
+.wechatpay_bg .hd {
+    font-size: 18px;
+    color: #606060
+}
+
+.hd img {
+    width: 64px;
+    height: 64px;
+    margin-left: 7%;
+    border-radius: 100%
+}
+
+.pay_list {
+    width: 100%;
+    padding: 5% 10%
+}
+
+.yo-tip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 69%;
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, .6);
+    color: #fff;
+    z-index: 9999999
+}
+
+.pay_list .title {
+    font-size: 11px;
+    color: #71787f;
+    margin-bottom: 10px
+}
+
+.pay_list .item {
+    width: 31.5%;
+    margin: 5px 7px 5px 0;
+    padding: 8px;
+    display: inline-block;
+    border: 1px solid #3eb742;
+    color: #3eb742;
+    border-radius: 2px;
+    font-size: 14px
+}
+
+.pay_list .item:nth-child(3n+1) {
+    margin-right: 0
+}
+
+.pay_list .item .price {
+    font-size: 23px;
+    margin: 7px 0 2px;
+    font-weight: 700
+}
+
+.detail {
+    margin: 8px 15px;
+    font-size: 11px;
+    color: #71787f
+}
+
+.detail span {
+    color: #f35d02
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: 100%
+}
+
+#btnList {
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    -webkit-box-pack: justify;
+    align-items: center;
+    -webkit-align-items: center;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    vertical-align: middle;
+    min-height: 52px
+}
+
+#btnList a {
+    width: 49%
+}
+
+.btn-list .btn {
+    display: block;
+    border-radius: 21px;
+    height: 42px;
+    margin-top: 20px;
+    line-height: 42px;
+    color: #676e89
+}
+
+.btn_wechatpay {
+    line-height: normal;
+    border: 1px solid #ff6f6f
+}
+
+.btn-normal {
+    border: 1px solid #4a90e2
+}
+
+.btn_free {
+    border: 1px solid #f5a623
+}
+
+.btn-list .btn:last-child {
+    margin-bottom: 0
+}
+
+.btn-list .btn .iconfont {
+    margin-right: 5px
+}
+
+.btn-list .btn .ico {
+    height: 20px;
+    margin-right: 10px;
+    margin-bottom: 4px;
+    vertical-align: middle
+}
+
+.free-wifi {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #3eb742;
+    text-align: right;
+    text-decoration: underline
+}
+
+.paying {
+    margin: 100px 30px 0
+}
+
+@media only screen and (max-width: 340px) {
+    .footer .p2 {
+        width: 100px
+    }
+}
+
+.bg {
+    margin-bottom: .1rem
+}
+
+.footer {
+    width: 100%;
+    background: #fff;
+    position: relative
+}
+
+.footer .gg-header {
+    font-size: 11px;
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee
+}
+
+.footer .wifi {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 3px;
+    background-image: url(../img/portal_wifi_icon1.png);
+    background-size: cover
+}
+
+.footer .gg-wrap {
+    position: relative;
+    padding: 10px 10px 0
+}
+
+.gg-wrap > div {
+    width: 100%;
+    display: inline-block
+}
+
+.footer .p1 {
+    margin-bottom: 10px
+}
+
+.footer .p2 {
+    font-size: 11px
+}
+
+.footer .button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -15px;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    color: #78ade4;
+    text-align: center;
+    border: 1px solid #dedede;
+    border-radius: 15px
+}
+
+.paying .button {
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background: #3eb742
+}
+
+.paying .button:hover {
+    background: #3eb777
+}
+
+.loadings {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 0, 0, .4);
+    top: 40%;
+    left: 50%;
+    z-index: 10000000;
+    margin-left: -50px;
+    border-radius: 5px;
+    display: none
+}
+
+.spinner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px
+}
+
+.circle1, .mask {
+    top: 0;
+    left: 0
+}
+
+.container1 > div, .container2 > div, .container3 > div {
+    width: 6px;
+    height: 6px;
+    background-color: #fff;
+    border-radius: 100%;
+    position: absolute;
+    -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+    animation: bouncedelay 1.2s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+}
+
+.spinner .spinner-container {
+    position: absolute;
+    width: 100%;
+    height: 100%
+}
+
+.container2 {
+    -webkit-transform: rotateZ(45deg);
+    transform: rotateZ(45deg)
+}
+
+.container3 {
+    -webkit-transform: rotateZ(90deg);
+    transform: rotateZ(90deg)
+}
+
+.circle2 {
+    top: 0;
+    right: 0
+}
+
+.circle3 {
+    right: 0;
+    bottom: 0
+}
+
+.circle4 {
+    left: 0;
+    bottom: 0
+}
+
+.container2 .circle1 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s
+}
+
+.container3 .circle1 {
+    -webkit-animation-delay: -1s;
+    animation-delay: -1s
+}
+
+.container1 .circle2 {
+    -webkit-animation-delay: -.9s;
+    animation-delay: -.9s
+}
+
+.container2 .circle2 {
+    -webkit-animation-delay: -.8s;
+    animation-delay: -.8s
+}
+
+.container3 .circle2 {
+    -webkit-animation-delay: -.7s;
+    animation-delay: -.7s
+}
+
+.container1 .circle3 {
+    -webkit-animation-delay: -.6s;
+    animation-delay: -.6s
+}
+
+.container2 .circle3 {
+    -webkit-animation-delay: -.5s;
+    animation-delay: -.5s
+}
+
+.container3 .circle3 {
+    -webkit-animation-delay: -.4s;
+    animation-delay: -.4s
+}
+
+.container1 .circle4 {
+    -webkit-animation-delay: -.3s;
+    animation-delay: -.3s
+}
+
+.container2 .circle4 {
+    -webkit-animation-delay: -.2s;
+    animation-delay: -.2s
+}
+
+.container3 .circle4 {
+    -webkit-animation-delay: -.1s;
+    animation-delay: -.1s
+}
+
+@-webkit-keyframes bouncedelay {
+    0%, 100%, 80% {
+        -webkit-transform: scale(0)
+    }
+    40% {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes bouncedelay {
+    0%, 100%, 80% {
+        transform: scale(0);
+        -webkit-transform: scale(0)
+    }
+    40% {
+        transform: scale(1);
+        -webkit-transform: scale(1)
+    }
+}
+
+.btn-list p {
+    padding: 8px 0 0;
+    font-size: 11px;
+    color: #676e76
+}
+
+.icon-wx {
+    color: #00c149
+}
+
+.icon-qq {
+    color: #00afe7
+}
+
+.icon-wb {
+    color: #ff5e00
+}
+
+.ft {
+    color: #999;
+    padding-bottom: 5px;
+    font-size: 11px
+}
+
+.ft a {
+    color: #1781dd
+}
+
+.ft3 {
+    color: #999;
+    font-size: 10px
+}
+
+.ft3 .safe {
+    display: inline-block;
+    width: 10px;
+    height: 12px;
+    margin-right: 5px;
+    background: url(../img/baidusafe.png);
+    background-size: cover
+}
+
+.mask, .wechat-guide {
+    display: none;
+    position: fixed
+}
+
+.mask {
+    z-index: 1000;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .7)
+}
+
+.wechat-guide {
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    z-index: 1001
+}
+
+.connect span, body[data-loading=true] .loadings {
+    display: block
+}
+
+.wechat-guide .content {
+    position: relative;
+    width: 70%;
+    margin-left: 15%;
+    background: url(../img/bg_wechat_act.png) no-repeat;
+    background-size: cover
+}
+
+.wechat-guide .content .free-get {
+    position: absolute;
+    left: 50%;
+    margin-left: -115px;
+    bottom: 30px;
+    border-radius: 21px;
+    width: 230px;
+    height: 38px;
+    line-height: 38px;
+    color: #5d85c2;
+    border: 1px solid #5d85c2;
+    text-align: center
+}
+
+.disabled {
+    opacity: .5
+}
+
+.wechat-guide .close {
+    width: 38px;
+    height: 58px;
+    margin: 0 auto;
+    background: url(../img/bg_wechat_close.png) no-repeat;
+    background-size: cover
+}
+
+#error p {
+    padding: 15px;
+    color: #f60;
+    line-height: 1.5
+}
+
+.agreement {
+    margin: 0 20px 20px;
+    font-size: 11px;
+    text-align: left;
+    background: #eff1f2
+}
+
+.agreement .content {
+    margin: 20px;
+    padding-top: 20px
+}
+
+.agreement .bottom {
+    border-top: 1px #fff solid;
+    text-align: center;
+    padding: 15px;
+    color: #1781dd
+}
+
+.agreement h2, .agreement p {
+    margin-bottom: 5px
+}
+
+.agreement .title {
+    text-align: center;
+    font-weight: 700
+}
+
+.agreement p {
+    text-indent: 2em
+}
+
+.agreement .ft2 {
+    text-align: right
+}
+
+.connect {
+    text-align: center;
+    padding: 150px 0 0
+}
+
+.connect img {
+    width: 90px
+}
+
+.connect h3 {
+    margin-top: 30px;
+    font-size: 19px;
+    color: #676e89
+}
+
+.connect span {
+    margin-top: 14px;
+    font-size: 12px;
+    color: #FFA20A
+}
+
+.connect p {
+    font-size: 12px;
+    color: #999
+}
+
+body[data-loading=false] .loadings {
+    display: none
+}
+
+.botem, .clearfix, .topem {
+    display: block
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+
+.btn-list .ico1, .btn-list .ico2 {
+    float: left;
+    margin: 10px 0 0 15%
+}
+
+.btn-list .ico2 {
+    margin: 13px 0 0 24px
+}
+
+.a_right, .img_ads {
+    margin-left: 4%;
+    float: left
+}
+
+.botem, .topem {
+    width: 74px;
+    height: 16px;
+    line-height: 16px;
+    text-align: left
+}
+
+#dialog h1, .down_ads, .tit2 {
+    text-align: center
+}
+
+.topem {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #000
+}
+
+.botem {
+    font-size: 9px
+}
+
+#all_add_ads .ads {
+    display: none;
+    width: 100%;
+    height: 70px
+}
+
+#ads_tencent .tit {
+    height: 30px;
+    background: url(../img/portal_wifi_icon1@2x.png) 10px 7px no-repeat;
+    background-size: 14px;
+    border-bottom: 1px solid #eee;
+    font-size: 10px;
+    padding-left: 30px;
+    line-height: 30px
+}
+
+.icon_wifi {
+    width: 14px
+}
+
+.ad_bao {
+    display: block;
+    width: 100%;
+    margin-top: 7px
+}
+
+.img_ads {
+    width: 50px
+}
+
+.wifi_ads {
+    float: left;
+    margin-left: 5%;
+    line-height: 26px
+}
+
+.wifi_ads .span1 {
+    color: #000;
+    font-size: 13px;
+    position: absolute;
+    top: 2px
+}
+
+.wifi_ads .span2 {
+    color: #000;
+    font-size: 11px;
+    position: absolute;
+    top: 24px
+}
+
+.down_ads {
+    float: right;
+    width: 67px;
+    height: 24px;
+    font-size: 12px;
+    border-radius: 6px;
+    line-height: 24px;
+    display: block;
+    color: #03c9a6;
+    margin: 14px 4% 0 0
+}
+
+#ads_book {
+    display: none;
+    width: 100%;
+    height: 76px;
+    padding: 8px;
+    border-top: 6px solid #eee
+}
+
+#ads_book .tit {
+    height: 26px;
+    line-height: 26px;
+    font-size: 13px;
+    padding-left: 10px;
+    color: #000
+}
+
+#ads_book .tit img {
+    width: 14px;
+    margin-right: 6px
+}
+
+#ads_book .cont {
+    display: block;
+    height: 100%
+}
+
+#ads_book .cont img {
+    width: 25%;
+    height: 100%;
+    margin-left: 2%;
+    float: left
+}
+
+.book_intr {
+    width: 67%;
+    float: right;
+    margin-right: 3%
+}
+
+#ads_gdt, #ads_gdt .img {
+    width: 100%;
+    display: block
+}
+
+.book_intr .p1 {
+    font-size: 12px;
+    color: #000
+}
+
+.book_intr .p2 {
+    margin-top: -3%;
+    font-size: 11px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2
+}
+
+#ads_gdt {
+    padding: 8px
+}
+#ads_gdt .tit {
+    height: 26px;
+    line-height: 26px;
+    font-size: 13px;
+    padding-left: 10px;
+    color: #000;
+    margin-bottom: 2%
+}
+
+#ads_gdt .cont {
+    display: block;
+    margin-top: -.4%
+}
+
+#ads_gdt .cont div:first-child {
+    height: 56px
+}
+
+#ads_gdt .cont img {
+    width: 25%;
+    height: 100%;
+    margin-left: 2%;
+    float: left
+}
+
+#ads_gdt .p1 {
+    color: #000
+}
+
+#ads_gdt .p2 {
+    font-size: 11px;
+    display: -webkit-box
+}
+
+#all_add_ads .tit1 {
+    height: 30px;
+    background: url(../img/portal_wifi_icon1@2x.png) 10px 7px no-repeat;
+    background-size: 14px;
+    font-size: 10px;
+    padding-left: 30px;
+    line-height: 30px
+}
+
+#mix2 {
+    display: none;
+    width: 53px;
+    height: 60px;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 2
+}
+
+.ads .tabs {
+    border-top: 6px solid #eee !important
+}
+
+.ads {
+    margin: 0 !important
+}
+
+.ad_yz_banner {
+    display: block;
+    width: 100%;
+    height: 70px
+}
+
+.togame {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: url(http://s.miwifi.com/sns_wifi_share_v2/img/ico_qqmusic.png);
+    background-size: 100%;
+    position: absolute;
+    top: 110px;
+    right: 48px
+}
+
+#img_xiaoai {
+    width: 100%;
+    height: 70px
+}
+
+.hide {
+    display: none
+}
+
+.new {
+    position: relative;
+
+    color: #fff;
+    background: linear-gradient(to right, #414559, #242635);
+    background: -webkit-linear-gradient(left, #414559, #242635)
+}
+
+.new_left {
+    float: left;
+    padding-left: 1em
+}
+
+.wifi_name {
+
+    color: #fff !important;
+
+    padding-top: 8px !important;
+
+
+}
+
+.new_right {
+    float: right !important
+}
+
+.wifi_info {
+    font-size: 10px;
+    color: #fff;
+    opacity: .7;
+}
+
+.new_right .button {
+    display: block !important;
+    float: right !important;
+    width: 70px !important;
+    height: 70px !important;
+    border-radius: 4px !important;
+    margin-right: 8px !important;
+    margin-top: 4px !important;
+    position: relative !important;
+    padding-top: 4px;
+}
+
+.new_right .hide {
+    display: none
+}
+
+#free_net .btn_free, #money_net .btn_wechatpay, .icon-mi {
+    display: block
+}
+
+.money_net {
+    background: #FCA618
+}
+
+.free_net {
+    background: #5FC948
+}
+
+.icon_mi {
+    float: left;
+    width: 30px;
+    height: 26px;
+    background: #f35d02;
+    margin-top: 9px;
+    margin-bottom: 9px;
+    border-radius: 1px
+}
+
+.icon-mi {
+    font-size: 8px;
+    margin-left: 2.5px;
+    margin-top: 3px;
+    color: #fff
+}
+
+.free_net span, .money_net span {
+    position: absolute;
+    top: 45px;
+    left: 6px
+}
+
+._more, ._showagreement, .feedback {
+    color: #fff;
+    opacity: .7;
+    font-size: 10px;
+    text-decoration: underline
+}
+
+._more {
+    color: #fff;
+    opacity: .7;
+    font-size: 10px;
+    text-decoration: underline;
+
+}
+
+
+#dialog ._more, #dialog ._showagreement {
+    text-decoration: none
+}
+
+.feedback {
+    margin-left: 6px
+}
+
+#dialog {
+    width: 90%;
+    height: 210px;
+    border-radius: 4px;
+    background: #fff;
+    position: fixed;
+    left: 5%;
+    top: 30%;
+    z-index: 1001;
+    margin-top: 30px;
+    color: #000
+}
+
+#dialog h1 {
+    font-size: 16px;
+    color: #333;
+    margin-top: 30px
+}
+
+#dialog .middle {
+    width: 210px;
+    height: 70px;
+    margin: 24px auto 0
+}
+
+.middle div {
+    width: 70px;
+    height: 70px;
+    border-radius: 4px;
+    background: #5FC948
+}
+
+#dialog .bottom {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 32px;
+    border-top: 1px solid #efefef;
+    color: #000
+}
+
+.bottom ._showagreement {
+    font-size: 10px;
+    line-height: 32px;
+    float: left;
+    margin-left: 10px
+}
+
+.bottom .feedback {
+    float: right;
+    font-size: 10px;
+    line-height: 32px;
+    margin-right: 10px;
+    color: #888 !important
+}
+
+#dialog .middle div {
+    position: relative
+}
+
+#dialog .middle .friend {
+    float: left
+}
+
+#dialog .middle .application {
+    float: right
+}
+
+.icon-hongbaoshangwang, .icon-mianfeishangwang, .icon-shenqingshangwang, .icon-weixinhaoyou {
+    position: absolute;
+    font-size: 34px !important;
+    top: 0;
+    left: 18px;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.icon-shenqingshangwang {
+    left: 20px
+}
+
+#dialog .middle .application span, #dialog .middle .friend span {
+    position: absolute;
+    top: 45px;
+    left: 6px;
+    color: #fff
+}
+
+#dialog .close {
+    display: block;
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    background: url(../img/x.png) no-repeat;
+    background-size: cover
+}
+
+#free_net .btn_free, #money_net .btn_wechatpay, .btn_wechat {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    z-index: 2;
+    border: none
+}
+
+#btnList {
+    display: none
+}
+
+.btn_wechat {
+    display: block
+}
+
+#ads_wifi, #img_r4, .none {
+    display: none
+}
+
+#dialog .middle .only {
+    float: none;
+    margin-left: 34%
+}
+
+.tit2 {
+    height: 10px;
+    color: #000;
+    opacity: .5;
+    font-size: 10px;
+    line-height: 10px;
+    background: #ffffff
+}
+
+.tit2:after, .tit2:before {
+    content: '';
+    width: 43px;
+    height: .5px;
+    top: 16px;
+    position: absolute
+}
+
+.tit2:before {
+    left: 9%
+}
+
+.tit2:after {
+    right: 9%
+}
+
+.wechatpay_bg .hd {
+    margin-top: 0 !important
+}
+
+#btnNetApply span, #free_net span, #friend span, #money_net span {
+    font-size: 12px;
+    margin-left: 5px
+}
+
+#content {
+    margin-top: 20px
+}
+
+#img_r4 {
+    width: 100%;
+    height: 60px
+}
+
+#ads_wifi {
+    margin-bottom: 3%
+}
+
+#ads_wifi .img {
+    width: 92%;
+    margin-left: 4%
+}
+
+#ads_wifi .p1 {
+    margin-left: 4%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    color: #000
+}
+
+#ad_qian p {
+    padding-left: 3%;
+    color: #000
+}
+
+.a_button, .p_tit {
+    text-align: center;
+    color: #fff
+}
+
+#ad_qian .cont img {
+    float: left;
+    width: 29%;
+    margin-left: 3%;
+    padding: 10px 0
+}
+
+#ad_qian .cont img:first {
+    margin-left: 4%
+}
+
+.img_ads_te {
+    width: 35%;
+    float: right
+}
+
+#ads_gdt .p1 {
+    margin-top: 10px
+}
+
+#ads_gdt .p2 {
+    margin-top: 14px;
+    -webkit-line-clamp: 1
+}
+
+#ads_aitwo img, #ads_lucky img {
+    width: 92%;
+    margin-left: 4%;
+    height: 60px
+}
+
+#lite {
+    width: 100%;
+    height: 100%;
+    background: #282C3F
+}
+
+#lite .new_logo {
+    position: absolute;
+    top: 20px;
+    left: 20px
+}
+
+.wifi_chain {
+    width: 20%;
+    position: absolute;
+    top: 18%;
+    left: 40%
+}
+
+.lite, .p_tit {
+    width: 100%;
+    position: absolute
+}
+
+.p_tit {
+    font-size: .2rem;
+    top: 33%
+}
+
+.lite {
+    top: 46%
+}
+
+.a_button {
+    display: block;
+    width: 70%;
+    height: .9rem;
+    position: absolute;
+    bottom: 16%;
+    left: 15%;
+    background: #0ebc8f;
+    border-radius: .2rem
+}
+
+.button_top {
+    font-size: .2rem;
+    margin-top: .18rem;
+    font-weight: 700
+}
+
+.button_bottom {
+    font-size: .16rem
+}

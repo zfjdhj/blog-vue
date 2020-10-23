@@ -1,3 +1,12 @@
+module.exports = {
+    assetsDir: 'static',
+    parallel: false,
+    publicPath: '/'
+}
+
+
+
+
 // const webpack = require('webpack')
 //
 //

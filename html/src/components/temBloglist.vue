@@ -1,6 +1,6 @@
 <template>
   <!--Left-->
-  <div class="eleven wide column">
+<!--  <div class="eleven wide column">-->
     <!--header-->
     <div class="ui top attached segment">
       <div class="ui middle aligned two column grid">
@@ -60,7 +60,7 @@
         </div>
       </div>
     </div>
-  </div>
+<!--  </div>-->
 </template>
 
 <script>

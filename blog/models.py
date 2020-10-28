@@ -33,6 +33,7 @@ class Blog(models.Model):
 
 
 class BlogTags(models.Model):
+    id = models.BigIntegerField(primary_key=True)
     blogs = models.ForeignKey(Blog, models.DO_NOTHING)
     tags = models.ForeignKey('Tag', models.DO_NOTHING)
 

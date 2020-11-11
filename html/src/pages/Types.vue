@@ -13,6 +13,10 @@ import temTypes from "@/components/temTypes";
 
 export default {
   name: "Types",
+  created() {
+      console.log(this.$route);
+      console.log(this.$route.query.name);
+  },
   components:{
     'wbc-nav':header,
     'wbc-footer':footer,

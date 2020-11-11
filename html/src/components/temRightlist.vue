@@ -6,13 +6,13 @@
           <i class="idea icon"></i>分类
         </div>
         <div class="right aligned column">
-          <a href="#" th:href="@{/types/-1}" target="_blank">more <i class="angle double right icon"></i></a>
+          <router-link to="/types/-1">more <i class="angle double right icon"></i></router-link>
         </div>
       </div>
     </div>
     <div class="ui teal segment">
       <div class="ui fluid vertical menu">
-        <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item" th:each="type : ${types}">
+        <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${types}">
           <span th:text="${type.name}">Type1</span>
           <div class="ui teal basic left pointing label" th:text="${#arrays.length(type.blogs)}">1</div>
         </a>
@@ -27,12 +27,12 @@
           <i class="tags icon"></i>标签
         </div>
         <div class="right aligned column">
-          <a href="#" th:href="@{/tags/-1}" target="_blank">more <i class="angle double right icon"></i></a>
+          <router-link to="/tags/-1">more <i class="angle double right icon"></i></router-link>
         </div>
       </div>
     </div>
     <div class="ui teal segment">
-      <a href="#" th:href="@{/tags/{id}(id=tag.id)}" target="_blank" class="ui teal basic left pointing label custom-margin-tb-tiny" th:each="tag : ${tags}">
+      <a href="#" th:href="@{/tags/{id}(id=tag.id)}" class="ui teal basic left pointing label custom-margin-tb-tiny" th:each="tag : ${tags}">
         <span th:text="${tag.name}">Tag1</span> <div class="detail" th:text="${#arrays.length(tag.blogs)}">1</div>
       </a>
     </div>
@@ -43,7 +43,7 @@
       <i class="fire icon"></i>推荐!
     </div>
     <div class="ui segment" th:each="blog,iterStat : ${recommendBlogs}" th:classappend="${iterStat.count}==1 ? teal">
-      <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="custom-black custom-text-thin" th:text="${blog.title}">Hot</a>
+      <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="custom-black custom-text-thin" th:text="${blog.title}">Hot</a>
     </div>
   </div>
   <!--Comment-->
@@ -74,7 +74,7 @@
             <i class="copy icon"></i>剪贴板
           </div>
           <div class="right aligned column">
-            <a href="#" th:href="@{/admin/clipboards}" target="_blank">more <i class="angle double right icon"></i></a>
+            <router-link to="/admin/clipboards">more <i class="angle double right icon"></i></router-link>
           </div>
         </div>
       </div>

@@ -14,6 +14,10 @@ import temTags from "@/components/temTags";
 
 export default {
   name: "Tags",
+  created() {
+    console.log(this.$route);
+    console.log(this.$route.params.name);
+  },
   components:{
     'wbc-nav':header,
     'wbc-tags':temTags,

@@ -19,7 +19,7 @@ const routes = [
     component: () => import( '../pages/Types.vue')
   },
   {
-    path: '/tags',
+    path: '/tags/:name/:age',
     name: 'Tags',
     component: () => import( '../pages/Tags')
   },
@@ -31,36 +31,54 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
-    component: () => import( '../pages/admin/Login.vue')
+    component: () => import( '../pages/admin/Index'),
+    children:[
+      {
+        path: '',
+        name: 'AdminHome',
+        component: () => import( '../pages/admin/Home')
+      },
+      {
+        path: 'blogs',
+        name: 'AdminBlogs',
+        component: () => import( '../pages/admin/Blogs')
+      }, {
+        path: '/blogs/input',
+        name: 'AdminBlogsInput',
+        component: () => import( '../pages/admin/BlogsInput')
+      }, {
+        path: 'types',
+        name: 'AdminTypes',
+        component: () => import( '../pages/admin/Types')
+      }, {
+        path: 'tags',
+        name: 'AdminTags',
+        component: () => import( '../pages/admin/Tags')
+      },{
+        path: 'comments',
+        name: 'AdminComments',
+        component: () => import( '../pages/admin/Comments')
+      },
+      {
+        path: 'clipboards',
+        name: 'AdminClipboards',
+        component: () => import( '../pages/admin/Clipboards')
+      },
+    ]
   },
   {
     path: '/login',
     name: 'Login',
     component: () => import( '../pages/admin/Login.vue')
-  }, {
-    path: '/admin/blogs',
-    name: 'AdminBlogs',
-    component: () => import( '../pages/admin/Blogs')
-  }, {
-    path: '/admin/blogs/input',
-    name: 'AdminBlogsInput',
-    component: () => import( '../pages/admin/BlogsInput')
-  }, {
-    path: '/admin/types',
-    name: 'AdminTypes',
-    component: () => import( '../pages/admin/Types')
-  }, {
-    path: '/admin/tags',
-    name: 'AdminTags',
-    component: () => import( '../pages/admin/Tags')
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: () => import( '../components/test')
   },{
-    path: '/admin/comments',
-    name: 'AdminComments',
-    component: () => import( '../pages/admin/Comments')
-  },{
-    path: '/admin/clipboards',
-    name: 'AdminClipboards',
-    component: () => import( '../pages/admin/Clipboards')
+    path: '/test2',
+    name: 'Test2',
+    component: () => import( '../components/test2')
   },
 
 
@@ -77,7 +95,8 @@ const routes = [
 const router = createRouter({
   // mode: 'history',
   history: createWebHistory(),
-  routes
+  routes,
+  linkActiveClass:"active"
 })
 
 export default router

@@ -1,15 +1,4 @@
-
 module.exports = {
-    assetsDir: 'static',
-    parallel: false,
-    publicPath: '/',
-    // configureWebpack:{
-    //     plugins:[
-    //         new webpack.BannerPlugin({
-    //             banner:"zfjdhj"
-    //         })
-    //     ]
-    // }
 }
 
 

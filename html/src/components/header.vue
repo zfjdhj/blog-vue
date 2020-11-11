@@ -4,11 +4,15 @@
     <div class="ui container">
       <div class="ui inverted secondary stackable menu">
         <h2 class="ui teal header item">纸飞机的个人小站</h2>
-        <a href="/home"  class="mobile-item item custom-mobile-hide"><i class="home icon"></i>首页</a>
-        <a href="/types"  class="mobile-item item custom-mobile-hide"><i class="idea icon"></i>分类</a>
-        <a href="/tags"  class="mobile-item item custom-mobile-hide"><i class="tags icon"></i>标签</a>
-        <a href="/tags"  class="mobile-item item custom-mobile-hide"><i class="tags icon"></i>Tool</a>
-        <a href="/archives"  class="mobile-item item custom-mobile-hide"><i class="clone icon"></i>归档</a>
+<!--        <a href="/home"  class="mobile-item item custom-mobile-hide"><i class="home icon"></i>首页</a>-->
+        <router-link to="/home" class="mobile-item item custom-mobile-hide"><i class="home icon"></i>首页</router-link>
+<!--        <a href="/types"  class="mobile-item item custom-mobile-hide"><i class="idea icon"></i>分类</a>-->
+        <router-link to="/types?name=zfj&age=18"  class="mobile-item item custom-mobile-hide"><i class="idea icon"></i>分类</router-link>
+<!--        <a href="/tags"  class="mobile-item item custom-mobile-hide"><i class="tags icon"></i>标签</a>-->
+        <router-link to="/tags/zfj/18"  class="mobile-item item custom-mobile-hide"><i class="tags icon"></i>标签</router-link>
+        <router-link to="/tools"  class="mobile-item item custom-mobile-hide"><i class="tags icon"></i>Tool</router-link>
+<!--        <a href="/archives"  class="mobile-item item custom-mobile-hide"><i class="clone icon"></i>归档</a>-->
+        <router-link to="/archives"  class="mobile-item item custom-mobile-hide"><i class="clone icon"></i>归档</router-link>
         <div class="right custom-mobile-hide mobile-item item">
           <form name="search" action="#" method="post" target="_blank">
             <label class="ui icon inverted transparent input">

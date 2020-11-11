@@ -4,7 +4,7 @@
   <wbc-adminnav></wbc-adminnav>
   <div class="ui attached pointing menu">
     <div class="ui container">
-      <div th:replace="admin/_fragments :: back">back</div>
+      <router-link to="/">返回前台</router-link>
       <div class="right menu">
         <a href="#" th:href="@{/admin/blogs/input}" class="item">发布</a>
         <a href="#" th:href="@{/admin/blogs}" class="active teal item">列表</a>

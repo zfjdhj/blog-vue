@@ -4,11 +4,11 @@
     <div class="ui container">
       <div class="ui inverted secondary stackable menu">
         <h2 class="ui teal header item">管理后台</h2>
-        <a href="/admin/blogs" th:href="@{/admin/blogs}" class="mobile-item item custom-mobile-hide" th:classappend="${indexCount == 1} ? 'active'"><i class="home icon"></i>文章</a>
-        <a href="/admin/types" th:href="@{/admin/types}" class="mobile-item item custom-mobile-hide" th:classappend="${indexCount == 2} ? 'active'"><i class="idea icon"></i>分类</a>
-        <a href="/admin/tags" th:href="@{/admin/tags}" class="mobile-item item custom-mobile-hide" th:classappend="${indexCount == 3} ? 'active'"><i class="tags icon"></i>标签</a>
-        <a href="/admin/comments" th:href="@{/admin/comments}" class="mobile-item item custom-mobile-hide" th:classappend="${indexCount == 4} ? 'active'"><i class="comments icon"></i>评论</a>
-        <a href="/admin/clipboards" th:href="@{/admin/clipboards}" class="mobile-item item custom-mobile-hide" th:classappend="${indexCount == 5} ? 'active'"><i class="copy icon"></i>剪贴板</a>
+        <router-link to="/admin/blogs" th:href="@{/admin/blogs}" class="mobile-item item custom-mobile-hide" th:classappend="${indexCount == 1} ? 'active'"><i class="home icon"></i>文章</router-link>
+        <router-link to="/admin/types" th:href="@{/admin/types}" class="mobile-item item custom-mobile-hide" th:classappend="${indexCount == 2} ? 'active'"><i class="idea icon"></i>分类</router-link>
+        <router-link to="/admin/tags" th:href="@{/admin/tags}" class="mobile-item item custom-mobile-hide" th:classappend="${indexCount == 3} ? 'active'"><i class="tags icon"></i>标签</router-link>
+        <router-link to="/admin/comments" th:href="@{/admin/comments}" class="mobile-item item custom-mobile-hide" th:classappend="${indexCount == 4} ? 'active'"><i class="comments icon"></i>评论</router-link>
+        <router-link to="/admin/clipboards" th:href="@{/admin/clipboards}" class="mobile-item item custom-mobile-hide" th:classappend="${indexCount == 5} ? 'active'"><i class="copy icon"></i>剪贴板</router-link>
         <div class="right mobile-item custom-mobile-hide menu">
           <div class="ui dropdown item">
             <div class="text">

@@ -14,13 +14,24 @@ const routes = [
     component: () => import( '../pages/Home.vue')
   },
   {
+    path: '/home/:page',
+    name: 'HomePage',
+    // query: { page: this.params.page },
+    component: () => import( '../pages/Home.vue')
+  },
+  {
     path: '/types',
     name: 'Types',
     component: () => import( '../pages/Types.vue')
   },
   {
-    path: '/tags/:name/:age',
+    path: '/tags',
     name: 'Tags',
+    component: () => import( '../pages/Tags')
+  },
+  {
+    path: '/tools',
+    name: 'Tools',
     component: () => import( '../pages/Tags')
   },
     {

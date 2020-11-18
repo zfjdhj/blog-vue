@@ -8,24 +8,27 @@
               后台管理登录
             </div>
           </h2>
-          <form class="ui large form" method="post" action="#" th:action="@{/admin/login}">
+          <form class="ui large form" method="post" action="#">
             <div class="ui segment">
+
               <div class="field">
-                <div class="ui left icon input">
+                <div class="ui left icon input" >
                   <i class="user icon"></i>
-                  <input type="text" name="username" placeholder="用户名">
+                  <input v-model="username" type="text" name="username" placeholder="用户名">
                 </div>
               </div>
+
               <div class="field">
                 <div class="ui left icon input">
                   <i class="lock icon"></i>
-                  <input type="password" name="password" placeholder="Password">
+                  <input v-model="password" type="password" name="password" placeholder="Password">
                 </div>
               </div>
-              <button class="ui fluid large teal submit button">登  录</button>
+
+              <button class="ui fluid large teal submit button" :disabled="isDisabled">登  录</button>
             </div>
             <div class="ui error mini message"></div>
-            <div class="ui negative mini message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">用户名，密码错误</div>
+            <div class="ui negative mini message" v-show="isShow">{{errMsg}}<!--用户名，密码错误--></div>
           </form>
         </div>
       </div>
@@ -36,7 +39,32 @@
 import "../../../static/css/custom.css"
 
 export default {
-name: "Login"
+name: "Login",
+  data(){
+    return{
+      username:"",
+      password:"",
+      isDisabled:true,
+      isShow:false,
+      errMsg:""
+    }
+  },
+  watch:{
+    username(){
+      if (this.username && this.password){
+        this.isDisabled=false
+      } else {
+        this.isDisabled=true
+      }
+    },
+    password(){
+      if (this.username && this.password){
+        this.isDisabled=false
+      } else {
+        this.isDisabled=true
+      }
+    }
+  }
 }
 </script>
 

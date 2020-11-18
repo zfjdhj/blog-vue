@@ -13,4 +13,6 @@ urlpatterns = [
     path('get_type/', views.get_type),
     path('get_tag/', views.get_tag),
     path('get_recommend/', views.get_recommend),
+    path('get_comment/', views.get_comment),
+    path('get_clipboard/', views.get_clipboard),
 ]

@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import header from "@/components/header";
-import footer from "@/components/footer";
+import typeheader from "@/components/header";
+import typefooter from "@/components/footer";
 import temTypes from "@/components/temTypes";
 
 export default {
@@ -18,8 +18,8 @@ export default {
       console.log(this.$route.query.name);
   },
   components:{
-    'wbc-nav':header,
-    'wbc-footer':footer,
+    'wbc-nav':typeheader,
+    'wbc-footer':typefooter,
     'wbc-types':temTypes
   }
 }

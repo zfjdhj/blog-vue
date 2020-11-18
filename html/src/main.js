@@ -4,6 +4,9 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import SuiVue from 'semantic-ui-vue';
+/*初始化css样式*/
+import "../static/css/scss/main.scss"
+import "../static/css/main.css"
 // import element from "./plugins/element"
 // import './plugins/element.js'
 /*导入element ui*/

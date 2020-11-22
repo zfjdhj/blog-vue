@@ -13,7 +13,7 @@ import service from "@/util/request";
 /*
 * GET请求获取blog列表
 * */
-function getBlog(num){
+function getBlogPage(num){
   return service.request(page(num))
 }
 function page(num){
@@ -38,6 +38,20 @@ function page(num){
     }
 }
 
+
+/*
+* GET请求获取Blog页面
+* */
+function getBlogById(num){
+    return service.request({
+        url: "/api/get_blog?id=" + num,
+        method:"get",
+        data:{
+            data1: "data1",
+            data2: "data2"
+        }
+    })
+}
 
 /*
 * GET请求获取TypeTop列表
@@ -108,4 +122,4 @@ function getClipboardTop(num){
     })
 }
 
-export { getBlog,getTypeTop,getTagTop,getRecommendTop,getCommentTop,getClipboardTop };
+export { getBlogPage,getTypeTop,getTagTop,getRecommendTop,getCommentTop,getClipboardTop,getBlogById };

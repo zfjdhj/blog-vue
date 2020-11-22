@@ -7,7 +7,7 @@
 <!--        <a href="/home"  class="mobile-item item custom-mobile-hide"><i class="home icon"></i>首页</a>-->
         <router-link to="/home" class="mobile-item item custom-mobile-hide"><i class="home icon"></i>首页</router-link>
 <!--        <a href="/types"  class="mobile-item item custom-mobile-hide"><i class="idea icon"></i>分类</a>-->
-        <router-link to="/types"  class="mobile-item item custom-mobile-hide"><i class="idea icon"></i>分类</router-link>
+        <router-link to="/types/-1"  class="mobile-item item custom-mobile-hide"><i class="idea icon"></i>分类</router-link>
 <!--        <a href="/tags"  class="mobile-item item custom-mobile-hide"><i class="tags icon"></i>标签</a>-->
         <router-link to="/tags"  class="mobile-item item custom-mobile-hide"><i class="tags icon"></i>标签</router-link>
         <router-link to="/tools"  class="mobile-item item custom-mobile-hide"><i class="tags icon"></i>Tool</router-link>

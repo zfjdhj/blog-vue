@@ -18,12 +18,17 @@ import 'vant/lib/index.css';
 
 import pulginTest from "./plugins/newplugin/newplugin"
 
+import $ from 'jquery'
+import Prism from 'prismjs'
+
+
+
 // import $ from 'jquery'
 
 
 // prototype.$
 const app=createApp(App)
-app.use(router).use(Vuex).use(store).use(SuiVue).use(Vant).use(pulginTest)
+app.use(router).use(Vuex).use(store).use(SuiVue).use(Vant).use(pulginTest).use($).use(Prism)
 app.directive('color2', {
     // 当被绑定的元素插入到 DOM 中时……
     mounted(el) {

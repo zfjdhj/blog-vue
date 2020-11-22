@@ -20,7 +20,13 @@ const routes = [
     component: () => import( '../pages/Home.vue')
   },
   {
-    path: '/types',
+    path: '/blog/:id',
+    name: 'Blog',
+    // query: { page: this.params.page },
+    component: () => import( '../pages/Blog.vue')
+  },
+  {
+    path: '/types/:id',
     name: 'Types',
     component: () => import( '../pages/Types.vue')
   },

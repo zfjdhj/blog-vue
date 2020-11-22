@@ -8,17 +8,17 @@
           <div class="ui teal header">文章</div>
         </div>
         <div class="right aligned column">
-          共 <h3 class="ui orange header custom-inline-block custom-text-thin" v-text=" blogData.data.total "></h3> 篇
+          共 <h3 class="ui orange header custom-inline-block custom-text-thin" v-text=" blogListData.data.total "></h3> 篇
         </div>
       </div>
     </div>
-<!--  <p>{{mode}}&#45;&#45;{{page}}&#45;&#45;{{blogData.data.total}}</p>-->
+<!--  <p>{{mode}}&#45;&#45;{{page}}&#45;&#45;{{blogListData.data.total}}</p>-->
     <!--content-->
-    <div v-for="blog in blogData.data.list" :key="blog.id" class="ui attached segment">
+    <div v-for="blog in blogListData.data.list" :key="blog.id" class="ui attached segment">
       <div class="ui custom-padded vertical segment custom-padded-tb-large" >
         <div class="ui middle aligned mobile reversed stackable grid">
           <div style="" class="eleven wide column" >
-            <h3 class="ui header"><a href="#"  target="_blank" class="custom-black" v-text="blog.title"></a></h3>
+            <h3 class="ui header"><router-link :to="{path:'/blog/'+blog.id}" class="custom-black" v-text="blog.title"></router-link></h3>
             <p class="custom-text" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;" v-text="blog.description"></p>
             <div class="ui stackable grid">
               <div class="row ">
@@ -64,7 +64,7 @@
         <div class="right aligned column">
           <router-link :to="{path:'/home',query:{page:page+1}}"
                        class="ui teal basic mini button"
-                       v-show="page*10 < blogData.data.total"
+                       v-show="page*10 < blogListData.data.total"
                         >下一页</router-link>
 <!--          <button @click="test">test</button>-->
         </div>
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { getBlog } from "@/api/home"
+import { getBlogPage } from "@/api/home"
 import {ref,reactive, onMounted} from "vue"
 // import {ref,reactive, onMounted} from "vue"
 // import store from "../store"
@@ -123,12 +123,13 @@ name: "temBloglist",
     let tmp=reactive({
       data:0
     })
-    let blogData=reactive({data:""})
+    let blogListData=reactive({data:""})
+    console.log("加载blog...")
     console.log("page3",page.value)
-    getBlog(page.value-1).then(res=>{
-      blogData.data=res.data
-      // console.log("page",blogData.data.page)
-      console.log(blogData.data);
+    getBlogPage(page.value-1).then(res=>{
+      blogListData.data=res.data
+      // console.log("page",blogListData.data.page)
+      console.log(blogListData.data);
     })
 
     onMounted(()=>{
@@ -139,7 +140,7 @@ name: "temBloglist",
     return{
       mode,
       page,
-      blogData,
+      blogListData,
       tmp,
       // back
       }
@@ -155,9 +156,9 @@ name: "temBloglist",
         console.log(newValue.page);
         console.log('oldValue',oldValue);
         if (newValue.page>0){
-          getBlog(newValue.page-1).then(res=>{
-            this.blogData.data=res.data
-            console.log(this.blogData.data);
+          getBlogPage(newValue.page-1).then(res=>{
+            this.blogListData.data=res.data
+            console.log(this.blogListData.data);
             this.page=parseInt(newValue.page)
             console.log(this.page);
           })

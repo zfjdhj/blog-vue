@@ -2,22 +2,23 @@
 <template>
   <div>
     <wbc-nav></wbc-nav>
+<!--    <keep-alive>-->
     <div class="custom-container custom-padded-tb-big">
       <div class="ui container">
         <div class="ui stackable grid">
           <div class="eleven wide column">
-            <wbc-Bloglist :path="$route">
-            </wbc-Bloglist>
+              <wbc-Bloglist :path="$route">
+              </wbc-Bloglist>
           </div>
           <div class="five wide column">
-            <wbc-Rightlist></wbc-Rightlist>
+              <wbc-Rightlist></wbc-Rightlist>
           </div>
         </div>
       </div>
     </div>
+<!--    </keep-alive>-->
     <wbc-footer></wbc-footer>
   </div>
-
 </template>
 
 <script>

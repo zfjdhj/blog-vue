@@ -1,7 +1,7 @@
 <template>
   <div>
     <wbc-nav></wbc-nav>
-    <wbc-types></wbc-types>
+    <wbc-types :path="$route.path"></wbc-types>
     <wbc-footer></wbc-footer>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   name: "Types",
   created() {
       console.log(this.$route);
-      console.log(this.$route.query.name);
+      // console.log(this.$route.query.name);
   },
   components:{
     'wbc-nav':typeheader,

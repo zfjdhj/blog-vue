@@ -31,7 +31,8 @@ module.exports = {
             new webpack.BannerPlugin({
                 banner:"zfjdhj"
             })
-        ]
+        ],
+
     }
 }
 

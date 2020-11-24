@@ -7,44 +7,50 @@
           <div class="column">
             <div class="ui teal header">标签</div>
           </div>
-          <div class="right aligned column">共 <h3 class="ui orange header custom-inline-block custom-text-thin" th:text="${#arrays.length(tags)}"> 1 </h3> 个
+          <div class="right aligned column">共 <h3 class="ui orange header custom-inline-block custom-text-thin" v-text=" tagData.data.tag_total "></h3> 个
           </div>
         </div>
       </div>
       <!--tags-->
       <div class="ui attached segment custom-padded-tb-large">
-        <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui basic large left pointing label custom-margin-tb-tiny" th:classappend="${tag.id==activeTagId} ? 'teal'" th:each="tag : ${tags}">
-          <span th:text="${tag.name}">Tag1</span> <div class="detail"  th:text="${#arrays.length(tag.blogs)}">1</div>
-        </a>
+        <router-link v-for="tag in tagData.data.tag_item" :key="tag.tag_id" href="#" :to="{path:'/tags/'+tag.tag_id}"
+           class="ui basic large left pointing label custom-margin-tb-tiny" th:classappend="${tag.id==activeTagId} ? 'teal'">
+          <span v-text="tag.tag_name"></span> <div class="detail"  v-text="tag.blog_total"></div>
+        </router-link>
       </div>
 
       <!--blogs-->
       <div class="ui top attached teal segment">
-        <div class="ui custom-padded vertical segment custom-padded-tb-large" th:each="blog : ${page.content}">
+        <div class="ui custom-padded vertical segment custom-padded-tb-large"
+             v-for="blog in blogListData.data" :key="blog.id">
           <div class="ui middle aligned mobile reversed stackable grid">
             <div class="eleven wide column">
-              <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="custom-black" th:text="${blog.title}">零基础自建个人网站</a></h3>
-              <p class="custom-text" th:text="|${blog.description}......|">零基础自建个人网站零基础自建个人网站零零基础自建个人网站零基础自建个人网站零基础自</p>
+              <h3 class="ui header">
+                <router-link :to="{path:'/blog/'+blog.id}" href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="custom-black"
+                                       v-text="blog.title"></router-link></h3>
+              <p class="custom-text" v-text="blog.description"></p>
               <div class="ui stackable grid">
                 <div class="row ">
                   <div class="eleven wide column">
                     <div class="ui mini horizontal link list">
                       <div class="item">
                         <img src="" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">
-                        <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">ZFJ</a></div>
+                        <div class="content"><a href="#" class="header" v-text="blog.user_id"></a></div>
                       </div>
-                      <div class="item"><i class="calendar alternate outline icon"></i><span th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">Date</span></div>
-                      <div class="item"><i class="eye icon" ></i><span th:text="${blog.views}">123</span></div>
+                      <div class="item"><i class="calendar alternate outline icon"></i><span
+                          v-text="blog.create_time"></span></div>
+                      <div class="item"><i class="eye icon" ></i><span v-text="blog.views"></span></div>
                     </div>
                   </div>
                   <div class="right aligned five wide column">
-                    <a href="#" target="_balnk" class="ui teal basic label custom-padded-tiny custom-text-thin" th:text="${blog.type.name}">学习日志</a>
+                    <a href="#" target="_balnk" class="ui teal basic label custom-padded-tiny custom-text-thin"
+                       v-text="blog.type_id.name"></a>
                   </div>
                 </div>
                 <div class="row custom-padded-tb-tiny">
                   <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui basic left pointing label custom-text-thin custom-padded-mini"
                      th:classappend="${tag.id==activeTagId} ? 'teal'"
-                     th:each="tag : ${blog.tags}" th:text="${tag.name}">前端</a>
+                     v-for="tag in blog.tags" :key="tag.id" v-text="tag"></a>
                 </div>
               </div>
             </div>
@@ -67,15 +73,64 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
+import {reactive,ref} from "vue"
+import {useRoute} from "vue-router";
+import {getTagTop} from "@/api/home";
+
 export default {
-name: "temTags"
+name: "temTags",
+  setup(props, context) {
+    console.log(props);
+    console.log(context);
+    let route=useRoute()
+    console.log("path",route.path);
+    let tagData = reactive({data: ""})
+    let id = ref(route.path.slice(6))
+    let blogListData = reactive({data: ""})
+    getTagTop().then(res => {
+      res.data.type_item = sortByKey(res.data.tag_item, 'blog_total')
+      tagData.data = res.data
+      console.log("tagData.data", tagData.data);
+      console.log(id.value);
+      let tag_list = tagData.data.tag_item;
+      console.log("tag_list", tag_list);
+      if (id.value !=="-1") {
+        blogListData.data = tag_list.filter((item) => item.tag_id === parseInt(id.value))[0].blog_list
+      }else{
+        blogListData.data = tag_list.filter((item,id) => id === 0)[0].blog_list
+      }
+      console.log("blogListData", blogListData);
+    })
+    return {
+      tagData,
+      blogListData,
+    }
+  },
+  watch: {
+    "$route"(newValue, oldValue) {
+      console.log('newValue', newValue);
+      console.log('oldValue', oldValue);
+      if (newValue.name === "Tags") {
+        let id = ref(newValue.path.slice(6))
+        this.blogListData.data = this.tagData.data.tag_item.filter((item) => item.tag_id === parseInt(id.value))[0].blog_list
+        console.log(this.blogListData.data);
+      }
+    }
+  },
 }
+function sortByKey(array,key){
+  return array.sort(function(a,b){
+    var x=a[key];        // []  里是个变量   a代表 的是数组中的第一个json对象 。  a.age   因为age是个变量
+    var y=b[key];
+    return((x<y)?1:((x>y)?-1:0));
+  })
+}
+
 </script>
 
 <style scoped>

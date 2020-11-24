@@ -31,7 +31,7 @@ const routes = [
     component: () => import( '../pages/Types.vue')
   },
   {
-    path: '/tags',
+    path: '/tags/:id',
     name: 'Tags',
     component: () => import( '../pages/Tags')
   },

@@ -92,7 +92,7 @@ def get_type(request):
                 tmp_item = {}
                 tmp_item["type_id"] = item.id
                 tmp_item["type_name"] = item.name
-                tmp_list = list(Blog.objects.filter(published=True, type=item.id).values())
+                tmp_list = list(Blog.objects.filter(published=True, type=item.id).order_by('-update_time').values())
                 tmp_item["blog_total"] = len(tmp_list)
                 sort_list[item.id] = len(tmp_list)
                 new_tmp_list = []
@@ -115,7 +115,7 @@ def get_type(request):
                 tmp_item = {}
                 tmp_item["type_id"] = item.id
                 tmp_item["type_name"] = item.name
-                tmp_list = list(Blog.objects.filter(published=True, type=item.id).values())
+                tmp_list = list(Blog.objects.filter(published=True, type=item.id).order_by('-update_time').values())
                 tmp_item["blog_total"] = len(tmp_list)
                 sort_list[item.id] = len(tmp_list)
                 new_tmp_list = []
@@ -152,7 +152,7 @@ def get_tag(request):
                 sort_list[item.id] = len(tmp_list)
                 new_tmp_list = []
                 for item2 in tmp_list:
-                    tmp = list(Blog.objects.filter(published=True, id=item2["blogs_id"]).values())[0]
+                    tmp = list(Blog.objects.filter(published=True, id=item2["blogs_id"]).order_by('-update_time').values())[0]
                     tmp["content"] = ""
                     new_tmp_list.append(tmp)
                 tmp_item["blog_list"] = new_tmp_list
@@ -170,18 +170,23 @@ def get_tag(request):
                 tmp_item = {}
                 tmp_item["tag_id"] = item.id
                 tmp_item["tag_name"] = item.name
-                tmp_list = list(BlogTags.objects.filter(tags=item.id).values())
+                tmp_list = list(BlogTags.objects.filter(tags=item.id).order_by('-blogs').values())
                 tmp_item["blog_total"] = len(tmp_list)
                 sort_list[item.id] = len(tmp_list)
                 new_tmp_list = []
                 for item in tmp_list:
                     tmp = list(Blog.objects.filter(published=True, id=item["blogs_id"]).values())[0]
                     tmp["content"] = ""
+                    tmp["user_id"] = get_user_name_by_id(tmp["user_id"])
+                    tmp["type_id"] = get_type_name_by_id(tmp["type_id"])
+                    tmp["tags"] = get_tag_name_by_id(tmp["id"])
                     new_tmp_list.append(tmp)
                 tmp_item["blog_list"] = new_tmp_list
                 tag_item.append(tmp_item)
                 res["tag_item"] = tag_item
         res_json = json.dumps(res, cls=DateEncoder)
+        # print(res["tag_item"][3]["blog_list"][0]["update_time"])
+        # print(res["tag_item"][3]["blog_list"][1]["update_time"])
         return JsonResponse(json.loads(res_json))
 
 

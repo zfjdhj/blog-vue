@@ -76,10 +76,13 @@
 <script>
 import { getTypeTop} from "@/api/home";
 import {ref,reactive} from "vue"
+import {useRoute} from "vue-router"
 
 export default {
   name: "temTypes",
   setup(props, context) {
+    let route=useRoute()
+    console.log("path",route.path);
     let typeData = reactive({data: ""})
     let id = ref(context.attrs.path.slice(7))
     let blogListData = reactive({data: ""})

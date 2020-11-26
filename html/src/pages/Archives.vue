@@ -10,20 +10,23 @@
             <div class="left aligned column">
               <div class="ui teal header">归档</div>
             </div>
-            <div class="right aligned column">共 <h3 class="ui orange header custom-inline-block custom-text-thin" th:text="${blogCount}"> 1 </h3> 篇文章
+            <div class="right aligned column">共
+              <h3 class="ui orange header custom-inline-block custom-text-thin"
+                  v-text="archiveData.data.blog_total"></h3> 篇文章
             </div>
           </div>
         </div>
-        <th:block th:each="item : ${archiveMap}">
-          <h2 class="ui center aligned header" th:text="${item.key}">2019</h2>
+        <th:block v-for="group in archiveData.data.data" :key="group.year">
+          <h2 class="ui center aligned header" v-text="group.year"></h2>
           <div class="ui fluid vertical menu">
-
-            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${item.value}">
+            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item"
+               v-for="blog in group.list" :key="blog.id">
                         <span>
-                            <i class="teal mini circle icon"></i><span th:text="${blog.title}">123</span>
-                            <div class="ui teal basic left pointing custom-padded-tiny label" th:text="${#dates.format(blog.createTime,'MM月dd日')}">Date</div>
+                            <i class="teal mini circle icon"></i><span v-text="blog.title"></span>
+                            <div class="ui teal basic left pointing custom-padded-tiny label"
+                                 v-text="blog.create_time"></div>
                         </span>
-              <div class="ui orange basic custom-padded-mini label" th:text="${blog.flag}">原创</div>
+              <div class="ui orange basic custom-padded-mini label" v-text="blog.flag"></div>
             </a>
 
           </div>
@@ -37,9 +40,21 @@
 <script>
 import header from "@/components/header";
 import footer from "@/components/footer";
+import {reactive} from "vue"
+import {getArchive} from "@/api/home";
 
 export default {
 name: "Archives",
+  setup(){
+    let archiveData=reactive({data:""})
+    getArchive().then(res => {
+      archiveData.data=reactive(res.data)
+      console.log(archiveData);
+    })
+    return{
+      archiveData
+    }
+  },
   components:{
     'wbc-nav':header,
     'wbc-footer':footer

@@ -63,6 +63,16 @@ def get_blog(request):
             if not page:
                 res["page"] = "all"
                 res["list"] = new_list_blog
+            elif page == "admin":
+                blog = Blog.objects.all().order_by('-update_time').values()
+                for item in list(blog):
+                    item.pop("content")
+                    item["type_id"] = get_type_name_by_id(item["type_id"])
+                    item["tags"] = get_tag_name_by_id(item["id"])
+                    item["user_id"] = get_user_name_by_id(item["user_id"])
+                    new_list_blog.append(item)
+                res["page"] = "admin"
+                res["list"] = new_list_blog
             else:
                 res["page"] = page
                 res["list"] = new_list_blog[int(page) * 10:(int(page) + 1) * 10]
@@ -121,9 +131,9 @@ def get_type(request):
                 new_tmp_list = []
                 for item2 in tmp_list:
                     item2.pop("content")
-                    item2["user_id"]=get_user_name_by_id(item2["user_id"])
-                    item2["type_id"]=get_type_name_by_id(item2["type_id"])
-                    item2["tags"]=get_tag_name_by_id(item2["id"])
+                    item2["user_id"] = get_user_name_by_id(item2["user_id"])
+                    item2["type_id"] = get_type_name_by_id(item2["type_id"])
+                    item2["tags"] = get_tag_name_by_id(item2["id"])
                     new_tmp_list.append(item2)
                 tmp_item["blog_list"] = new_tmp_list
                 type_item.append(tmp_item)
@@ -152,7 +162,8 @@ def get_tag(request):
                 sort_list[item.id] = len(tmp_list)
                 new_tmp_list = []
                 for item2 in tmp_list:
-                    tmp = list(Blog.objects.filter(published=True, id=item2["blogs_id"]).order_by('-update_time').values())[0]
+                    tmp = \
+                    list(Blog.objects.filter(published=True, id=item2["blogs_id"]).order_by('-update_time').values())[0]
                     tmp["content"] = ""
                     new_tmp_list.append(tmp)
                 tmp_item["blog_list"] = new_tmp_list
@@ -259,3 +270,49 @@ def get_clipboard(request):
         res_json = json.dumps(res, cls=DateEncoder)
         # print(type(res_json))
         return JsonResponse(json.loads(res_json))
+
+
+# api:获取achieve列表
+# {
+#     data:[{
+#             year:"2019",
+#             list:[]},
+#         {
+#             year:"2020",
+#             list:[]},
+#         {
+#             year:"2021",
+#             list:[]},
+#         }
+#     ]
+# }
+def get_archive(request):
+    if request.method == "GET":
+        res={}
+        data=[]
+        year=[]
+        for yy in Blog.objects.extra(select={"year":"DATE_FORMAT(create_time, '%%Y')"},
+                                     # where={"t_blog b group by date_format(create_time,'%Y') order by year"},
+                                     order_by={"create_time"}).values():
+            year.append(yy["year"])
+        year=list(set(year))
+        for yy in year:
+            tmp_list = []
+            for blog in Blog.objects.extra(where={"DATE_FORMAT(create_time, '%%Y')=%s"},
+                                           params={int(yy)}).values():
+                print("blog",blog)
+                tmp_list.append(blog)
+            data.append({"year":yy,"list":tmp_list})
+        res["data"]=data
+        res["blog_total"]=len(Blog.objects.all())
+        res_json = json.dumps(res, cls=DateEncoder)
+        return JsonResponse(json.loads(res_json))
+
+# # api:获取achieve列表
+# def get_achieve(request):
+#     if request.method == "GET":
+#         for p in Blog.objects.extra(select={"c_time": "DATE_FORMAT(create_time, '%%Y')"},
+#                                     where={"DATE_FORMAT(create_time, '%%Y')=2019"}).values():
+#             print(p)
+#         res_json = json.dumps({"data": "null"})
+#         return JsonResponse(json.loads(res_json))

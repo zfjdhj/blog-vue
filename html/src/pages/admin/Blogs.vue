@@ -1,6 +1,5 @@
 <template>
   <div>
-
   <wbc-adminnav></wbc-adminnav>
   <div class="ui attached pointing menu">
     <div class="ui container">
@@ -72,14 +71,17 @@
           </tr>
           </thead>
           <tbody>
-          <tr th:each="blog,iterStat : ${page.content}">
-            <td th:text="${iterStat.count}">1</td>
-            <td th:text="${blog.title}" th:onclick="|window.location.href='/blog/${blog.id}'|">标题1</td>
-            <td th:text="${blog.type.name}">学习日志</td>
-            <td th:text="${blog.appreciation} ? ${blog.appreciationCount}:'OFF'" th:onclick="|window.location.href='@{/admin/blogs/{id}/changeAttribute/appreciation&{value}(id=${blog.id},value=${blog.appreciation})}'|">0</td>
-            <td th:text="${blog.recommend} ? '是':'否'" th:onclick="|window.location.href='@{/admin/blogs/{id}/changeAttribute/recommend&{value}(id=${blog.id},value=${blog.recommend})}'|">是</td>
-            <td th:text="${blog.published} ? '发布':'草稿'" th:onclick="|window.location.href='@{/admin/blogs/{id}/changeAttribute/published&{value}(id=${blog.id},value=${blog.published})}'|">草稿</td>
-            <td th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">Date-time</td>
+          <tr v-for="(blog,index) in blogListData.data.list" :key="blog.id">
+            <td v-text="index+1"></td>
+            <td v-text="blog.title" th:onclick="|window.location.href='/blog/${blog.id}'|"></td>
+            <td v-text="blog.type_id.name"></td>
+            <td v-text="blog.appreciation ? blog.appreciation_count:'OFF'"
+                th:onclick="|window.location.href='@{/admin/blogs/{id}/changeAttribute/appreciation&{value}(id=${blog.id},value=${blog.appreciation})}'|"></td>
+            <td v-text="blog.recommend ? '是':'否'"
+                th:onclick="|window.location.href='@{/admin/blogs/{id}/changeAttribute/recommend&{value}(id=${blog.id},value=${blog.recommend})}'|"></td>
+            <td v-text="blog.published ? '发布':'草稿'"
+                th:onclick="|window.location.href='@{/admin/blogs/{id}/changeAttribute/published&{value}(id=${blog.id},value=${blog.published})}'|"></td>
+            <td v-text="blog.update_time"></td>
             <td>
               <a href="" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini basic teal button">编辑</a>
               <a href="" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini basic red button">删除</a>
@@ -106,9 +108,23 @@
 <script>
 import header from "@/components/admin/header";
 import footer from "@/components/footer";
+import {reactive} from "vue"
+import {getBlogList} from "@/api/adminBlog"
+// import {getBlogPage} from "@/api/home";
 
 export default {
 name: "Blogs",
+  setup(){
+    let blogListData=reactive({data:""})
+    getBlogList().then(res=>{
+      blogListData.data=res.data
+      // console.log("page",blogListData.data.page)
+      console.log(blogListData.data);
+    })
+    return{
+      blogListData
+    }
+  },
   components:{
   "wbc-adminnav":header,
    "wbc-footer":footer

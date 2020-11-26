@@ -2,7 +2,7 @@
   <wbc-adminnav></wbc-adminnav>
   <div class="ui attached pointing menu">
     <div class="ui container">
-      <div th:replace="admin/_fragments :: back">back</div>
+      <router-link to="/">返回前台</router-link>
       <div class="right menu">
         <a href="#" th:href="@{/admin/tags/input}" class="item">新增</a>
         <a href="#" th:href="@{/admin/tags}" class="active teal item">列表</a>
@@ -26,10 +26,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="tag,iterStat : ${page.content}">
-          <td th:text="${iterStat.count}">1</td>
+        <tr v-for="(tag,index) in tagListData.data.tag_item" :key="tag.tag_id">
+          <td v-text="index+1"></td>
           <td>
-            <a href="" class="ui basic teal left pointing label custom-text-thin" th:text="${tag.name}">Tag1</a>
+            <a href="" class="ui basic teal left pointing label custom-text-thin"
+               v-text="tag.tag_name"></a>
           </td>
           <td>
             <a href="" th:href="@{/admin/tags/{id}/input(id=${tag.id})}" class="ui mini basic teal button">编辑</a>
@@ -56,9 +57,21 @@
 <script>
 import header from "@/components/admin/header";
 import footer from "@/components/footer";
+import {reactive} from "vue"
+import {getTagList} from "@/api/adminTag";
 
 export default {
 name: "Tags",
+  setup(){
+    let tagListData=reactive({data:""})
+    getTagList().then(res=>{
+      tagListData.data=res.data
+      console.log(tagListData.data);
+    })
+    return{
+      tagListData
+    }
+  },
   components:{
     "wbc-adminnav":header,
     "wbc-footer":footer

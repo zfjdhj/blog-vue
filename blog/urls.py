@@ -15,4 +15,5 @@ urlpatterns = [
     path('get_recommend/', views.get_recommend),
     path('get_comment/', views.get_comment),
     path('get_clipboard/', views.get_clipboard),
+    path('get_archive/', views.get_archive),
 ]

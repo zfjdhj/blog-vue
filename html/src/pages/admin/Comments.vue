@@ -2,7 +2,7 @@
   <wbc-adminnav></wbc-adminnav>
   <div class="ui attached pointing menu">
     <div class="ui container">
-      <div th:replace="admin/_fragments :: back">back</div>
+      <router-link to="/">返回前台</router-link>
       <div class="right menu">
         <a href="#" th:href="@{/admin/comments}" class="active teal item">列表</a>
       </div>
@@ -28,19 +28,25 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="comment,iterStat : ${page.content}">
-          <td th:text="${iterStat.count}">1</td>
-          <td th:text="${comment.nickname}">who</td>
+        <tr v-for="(comment,index) in commentListData.data.list" :key="comment.id">
+          <td v-text="index+1"></td>
+          <td v-text="comment.nickname"></td>
           <td style="overflow: hidden;text-overflow:ellipsis;">
-            <span class="ui custom-text-thin" th:utext="${comment.content}">comment1启动奇偶暗示大家哦啊扫地机欧弟就搜奥的斯阿刁圣诞节奥尼</span>
+            <span class="ui custom-text-thin"
+                  v-html="comment.content"></span>
           </td>
           <td>
-            <span class="ui custom-text" th:text="${comment.blog.title}">blogTitle</span>
-            <span class="ui custom-text-thin" style="color: #00a1d6" th:if="${comment.parentComment} != null">@</span>
-            <span class="ui custom-text-thin" style="color: #00a1d6" th:if="${comment.parentComment} != null" th:text="${comment.parentComment.nickname}" >Reply</span>
+            <span class="ui custom-text"
+                  v-text="comment.blog_id.title"></span>
+            <span class="ui custom-text-thin" style="color: #00a1d6"
+                  v-if="comment.parentComment != null">@</span>
+            <span class="ui custom-text-thin" style="color: #00a1d6"
+                  v-if="comment.parentComment != null"
+                  v-text="comment.parentComment.nickname"></span>
           </td>
           <td>
-            <span class="ui custom-text-thin" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd')}">yy-MM-dd</span>
+            <span class="ui custom-text-thin"
+                  v-text="comment.create_time"></span>
           </td>
           <td>
             <a href="" th:href="@{/admin/comments/{id}/delete(id=${comment.id})}" class="ui mini basic red button">删除</a>
@@ -65,9 +71,22 @@
 <script>
 import header from "@/components/admin/header";
 import footer from "@/components/footer";
+import {reactive} from "vue"
+import {getCommentList} from "@/api/adminComment";
 
 export default {
-name: "Comments",components:{
+name: "Comments",
+  setup(){
+    let commentListData=reactive({data:""})
+    getCommentList().then(res=>{
+      commentListData.data=res.data
+      console.log(commentListData.data);
+    })
+    return{
+      commentListData
+    }
+  },
+  components:{
     "wbc-adminnav":header,
     "wbc-footer":footer
   }

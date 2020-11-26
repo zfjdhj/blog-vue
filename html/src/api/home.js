@@ -121,5 +121,18 @@ function getClipboardTop(num){
         }
     })
 }
+/*
+* GET请求获取Archive列表
+* */
+function getArchive(){
+    return service.request({
+        url:"/api/get_archive",
+        method:"get",
+        data:{
+            data1: "data1",
+            data2: "data2"
+        }
+    })
+}
 
-export { getBlogPage,getTypeTop,getTagTop,getRecommendTop,getCommentTop,getClipboardTop,getBlogById };
+export { getBlogPage,getTypeTop,getTagTop,getRecommendTop,getCommentTop,getClipboardTop,getBlogById,getArchive };

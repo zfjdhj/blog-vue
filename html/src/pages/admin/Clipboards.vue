@@ -2,7 +2,7 @@
   <wbc-adminnav></wbc-adminnav>
   <div class="ui attached pointing menu">
     <div class="ui container">
-      <div th:replace="admin/_fragments :: back">back</div>
+      <router-link to="/">返回前台</router-link>
       <div class="right menu">
         <a href="#" th:href="@{/admin/clipboards}" class="active teal item">列表</a>
       </div>
@@ -26,13 +26,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="clipboard,iterStat : ${page.content}">
-          <td th:text="${iterStat.count}">1</td>
+        <tr v-for="(clipboard,index) in clipboardListData.data.list" :key="clipboard.id">
+          <td v-text="index+1"></td>
           <td>
-            <span class="ui custom-text-thin" th:text="${clipboard.content}">clipboard1</span>
+            <span class="ui custom-text-thin"
+                  v-text="clipboard.content"></span>
           </td>
           <td>
-            <span class="ui custom-text-thin" th:text="${#dates.format(clipboard.createTime,'yyyy-MM-dd')}">yy-MM-dd</span>
+            <span class="ui custom-text-thin"
+                  v-text="clipboard.create_time"></span>
           </td>
           <td>
             <a href="" th:href="@{/admin/clipboards/{id}/delete(id=${clipboard.id})}" class="ui mini basic red button">删除</a>
@@ -57,9 +59,22 @@
 <script>
 import header from "@/components/admin/header";
 import footer from "@/components/footer";
+import {reactive} from "vue"
+import {getClipboardList} from "@/api/adminClipboard";
 
 export default {
-name: "Clipboards",components:{
+name: "Clipboards",
+  setup(){
+    let clipboardListData=reactive({data:""})
+    getClipboardList().then(res=>{
+      clipboardListData.data=res.data
+      console.log(clipboardListData.data);
+    })
+    return{
+      clipboardListData
+    }
+  },
+  components:{
     "wbc-adminnav":header,
     "wbc-footer":footer
   }

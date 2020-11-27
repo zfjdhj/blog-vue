@@ -7,7 +7,6 @@
 
 from django.urls import path
 from . import views
-
 urlpatterns = [
     path('get_blog/', views.get_blog),
     path('get_type/', views.get_type),
@@ -16,4 +15,5 @@ urlpatterns = [
     path('get_comment/', views.get_comment),
     path('get_clipboard/', views.get_clipboard),
     path('get_archive/', views.get_archive),
+    path('admin_login/', views.admin_login),
 ]

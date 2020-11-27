@@ -163,7 +163,8 @@ def get_tag(request):
                 new_tmp_list = []
                 for item2 in tmp_list:
                     tmp = \
-                    list(Blog.objects.filter(published=True, id=item2["blogs_id"]).order_by('-update_time').values())[0]
+                        list(Blog.objects.filter(published=True, id=item2["blogs_id"]).order_by(
+                            '-update_time').values())[0]
                     tmp["content"] = ""
                     new_tmp_list.append(tmp)
                 tmp_item["blog_list"] = new_tmp_list
@@ -273,46 +274,47 @@ def get_clipboard(request):
 
 
 # api:获取achieve列表
-# {
-#     data:[{
-#             year:"2019",
-#             list:[]},
-#         {
-#             year:"2020",
-#             list:[]},
-#         {
-#             year:"2021",
-#             list:[]},
-#         }
-#     ]
-# }
 def get_archive(request):
     if request.method == "GET":
-        res={}
-        data=[]
-        year=[]
-        for yy in Blog.objects.extra(select={"year":"DATE_FORMAT(create_time, '%%Y')"},
+        res = {}
+        data = []
+        year = []
+        for yy in Blog.objects.extra(select={"year": "DATE_FORMAT(create_time, '%%Y')"},
                                      # where={"t_blog b group by date_format(create_time,'%Y') order by year"},
                                      order_by={"create_time"}).values():
             year.append(yy["year"])
-        year=list(set(year))
+        year = list(set(year))
         for yy in year:
             tmp_list = []
             for blog in Blog.objects.extra(where={"DATE_FORMAT(create_time, '%%Y')=%s"},
                                            params={int(yy)}).values():
-                print("blog",blog)
+                print("blog", blog)
                 tmp_list.append(blog)
-            data.append({"year":yy,"list":tmp_list})
-        res["data"]=data
-        res["blog_total"]=len(Blog.objects.all())
+            data.append({"year": yy, "list": tmp_list})
+        res["data"] = data
+        res["blog_total"] = len(Blog.objects.all())
         res_json = json.dumps(res, cls=DateEncoder)
         return JsonResponse(json.loads(res_json))
 
-# # api:获取achieve列表
-# def get_achieve(request):
-#     if request.method == "GET":
-#         for p in Blog.objects.extra(select={"c_time": "DATE_FORMAT(create_time, '%%Y')"},
-#                                     where={"DATE_FORMAT(create_time, '%%Y')=2019"}).values():
-#             print(p)
-#         res_json = json.dumps({"data": "null"})
-#         return JsonResponse(json.loads(res_json))
+
+# 导入,可以使此次请求忽略csrf校验
+from django.views.decorators.csrf import csrf_exempt
+
+
+# 在处理函数加此装饰器即可 @csrf_exempt
+
+# api:提交admin登录验证
+@csrf_exempt
+def admin_login(request):
+    if request.method == "POST":
+        res = {}
+        res["data"] = "succeed"
+        res["recode"] = "200"
+        res_json = json.dumps(res)
+        return JsonResponse(json.loads(res_json))
+    if request.method == "GET":
+        res = {}
+        res["data"] = "error"
+        res["recode"] = "403"
+        res_json = json.dumps(res)
+        return JsonResponse(json.loads(res_json))

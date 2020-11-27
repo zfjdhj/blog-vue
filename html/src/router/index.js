@@ -56,6 +56,11 @@ const routes = [
         component: () => import( '../pages/admin/Home')
       },
       {
+        path: 'index',
+        name: 'AdminIndex',
+        component: () => import( '../pages/admin/Home')
+      },
+      {
         path: 'blogs',
         name: 'AdminBlogs',
         component: () => import( '../pages/admin/Blogs')

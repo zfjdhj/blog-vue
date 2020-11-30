@@ -21,14 +21,17 @@ import pulginTest from "./plugins/newplugin/newplugin"
 import $ from 'jquery'
 import Prism from 'prismjs'
 
-
-
-// import $ from 'jquery'
-
+//markdown 编辑器
+import VueMarkdownEditor from "@kangc/v-md-editor";
+import '@kangc/v-md-editor/lib/style/base-editor.css';
+import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
+VueMarkdownEditor.use(vuepressTheme);
+//prismjs语法高亮
+import 'prismjs/components/prism-java';
 
 // prototype.$
 const app=createApp(App)
-app.use(router).use(Vuex).use(store).use(SuiVue).use(Vant).use(pulginTest).use($).use(Prism)
+app.use(router).use(Vuex).use(store).use(SuiVue).use(Vant).use(pulginTest).use($).use(Prism).use(VueMarkdownEditor);
 app.directive('color2', {
     // 当被绑定的元素插入到 DOM 中时……
     mounted(el) {

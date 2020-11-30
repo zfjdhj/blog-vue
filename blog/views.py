@@ -50,6 +50,7 @@ def get_blog(request):
         res = {}
         new_list_blog = []
         page = request.GET.get('page', '')
+        mode=request.GET.get('mode', '')
         id = request.GET.get('id', '')
         if not id:
             blog = Blog.objects.filter(published=True).order_by('-update_time').values()
@@ -80,9 +81,13 @@ def get_blog(request):
             return JsonResponse(json.loads(res_json))
         else:
             blog = Blog.objects.filter(id=id).values()[0]
-            blog["content"] = markdown.markdown(blog["content"], extensions=['markdown.extensions.fenced_code'])
+            if mode == "markdown":
+                pass
+            else:
+                blog["content"] = markdown.markdown(blog["content"], extensions=['markdown.extensions.fenced_code'])
             blog["user_id"] = get_user_name_by_id(blog["user_id"])
             blog["type_id"] = get_type_name_by_id(blog["type_id"])
+            blog["tags"] = get_tag_name_by_id(blog["id"])
             res_json = json.dumps(blog, cls=DateEncoder)
             return JsonResponse(json.loads(res_json))
 
@@ -301,8 +306,7 @@ def get_archive(request):
 from django.views.decorators.csrf import csrf_exempt
 
 
-# 在处理函数加此装饰器即可 @csrf_exempt
-
+# 跨域 在处理函数加此装饰器即可 @csrf_exempt
 # api:提交admin登录验证
 @csrf_exempt
 def admin_login(request):

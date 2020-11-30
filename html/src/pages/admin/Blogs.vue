@@ -30,7 +30,8 @@
                 <i class="dropdown icon"></i>
                 <div class="default text">分类</div>
                 <div class="menu">
-                  <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">分类1</div>
+                  <div th:each="type : ${types}" class="item" data-value="1"
+                       th:data-value="${type.id}" th:text="${type.name}">分类1</div>
                   <!--/*-->
                   <div class="item" data-value="2">分类2</div>
                   <!--*/-->
@@ -83,8 +84,10 @@
                 th:onclick="|window.location.href='@{/admin/blogs/{id}/changeAttribute/published&{value}(id=${blog.id},value=${blog.published})}'|"></td>
             <td v-text="blog.update_time"></td>
             <td>
-              <a href="" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini basic teal button">编辑</a>
-              <a href="" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini basic red button">删除</a>
+              <router-link href="" :to="{path:'/admin/blogs/'+blog.id+'/input'}"
+                 class="ui mini basic teal button">编辑</router-link>
+              <router-link href="" :to="{path:'/admin/blogs/'+blog.id+'/delete'}"
+                 class="ui mini basic red button">删除</router-link>
             </td>
           </tr>
           </tbody>
@@ -94,7 +97,7 @@
               <a onclick="page(this)" th:attr="data-page=${page.number}-1" class="item" th:unless="${page.first}">上一页</a>
               <a onclick="page(this)" th:attr="data-page=${page.number}+1" class="item" th:unless="${page.last}">下一页</a>
             </div>
-            <a href="#" th:href="@{/admin/blogs/input}" class="ui teal mini basic right floated button">新增</a>
+            <router-link :to="{path:'/admin/blogs/input'}" class="ui teal mini basic right floated button">新增</router-link>
           </th>
           </tfoot>
         </table>

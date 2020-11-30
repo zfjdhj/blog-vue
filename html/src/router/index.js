@@ -65,8 +65,12 @@ const routes = [
         name: 'AdminBlogs',
         component: () => import( '../pages/admin/Blogs')
       }, {
-        path: '/blogs/input',
+        path: 'blogs/:id/input',
         name: 'AdminBlogsInput',
+        component: () => import( '../pages/admin/BlogsInput')
+      },{
+        path: 'blogs/input',
+        name: 'AdminAddBlogsInput',
         component: () => import( '../pages/admin/BlogsInput')
       }, {
         path: 'types',

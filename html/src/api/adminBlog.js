@@ -15,4 +15,16 @@ function getBlogList() {
     })
 }
 
-export {getBlogList}
+function getBlogById(id) {
+    return service.request({
+        url: "/api/get_blog?id="+id+"&mode=markdown" ,
+        method:"get",
+        data:{
+            data1: "data1",
+            data2: "data2"
+        }
+    })
+}
+
+
+export {getBlogList,getBlogById}

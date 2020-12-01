@@ -141,15 +141,17 @@ import footer from "@/components/footer";
 /* eslint-disable*/
 import {ref,reactive} from "vue"
 import MarkdownEditor from "@/components/MarkdownEditor"
-import {getBlogById} from "@/api/adminBlog";
-import {useRoute} from "vue-router";
+import {getBlogById,addBlog} from "@/api/adminBlog";
+import {useRoute,useRouter} from "vue-router";
 import {getTypeList} from "@/api/adminType";
 import {getTagList} from "@/api/adminTag";
+import {routerLinkTo} from "@/util/router";
 
 export default {
   name: "BlogsInput",
   setup(){
     let route=useRoute()
+    let router=useRouter()
     let blogTitle=ref('标题')
     let blogFlag=ref('原创')
     let blogContent=ref('正文')
@@ -207,15 +209,32 @@ export default {
     function save(){
       blogData.data["published"]=false
       blogData.data["content"]=blogContent.value
-
+      blogData.data["flag"]=blogFlag.value
+      blogData.data["id"]=blog_id
+      addBlog(blogData).then(res=>{
+        routerLinkTo("/admin/blogs/"+res.data.data.blogId+"/input")
+        blog_id= res.data.data.blogId
+      }).catch(error=>{
+        console.log("save error:",error);
+      })
       console.log("save", blogData);
     }
     function publish(){
-      blogData.data["published"]=true
+      blogData.data["published"]=false
       blogData.data["content"]=blogContent.value
-      console.log('publish',blogData);
+      blogData.data["flag"]=blogFlag.value
+      blogData.data["id"]=blog_id
+      addBlog(blogData).then(res=>{
+        routerLinkTo("/admin/blogs/"+res.data.data.blogId+"/input")
+        blog_id= res.data.data.blogId
+        console.log(blog_id);
+      }).catch(error=>{
+        console.log("publish error",error);
+      })
     }
-    console.log(blogType);
+    function routerLinkTo(url){
+      router.push({path:url})
+    }
     return{
       blogData,
       blogFlag,

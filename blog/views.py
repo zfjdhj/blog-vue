@@ -1,3 +1,5 @@
+import time
+
 from django.core.checks import Tags
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -43,14 +45,14 @@ def get_user_name_by_id(param):
     return list(user)[0]["nickname"]
 
 
-# api:获取blog_top列表
+# api:GET获取blog_top列表
 def get_blog(request):
     print(type(request))
     if request.method == "GET":
         res = {}
         new_list_blog = []
         page = request.GET.get('page', '')
-        mode=request.GET.get('mode', '')
+        mode = request.GET.get('mode', '')
         id = request.GET.get('id', '')
         if not id:
             blog = Blog.objects.filter(published=True).order_by('-update_time').values()
@@ -92,7 +94,7 @@ def get_blog(request):
             return JsonResponse(json.loads(res_json))
 
 
-# api:获取type_top列表
+# api:GET获取type_top列表
 def get_type(request):
     if request.method == "GET":
         top_num = request.GET.get('top', '')
@@ -147,7 +149,7 @@ def get_type(request):
         return JsonResponse(json.loads(res_json))
 
 
-# api:获取tag_top列表
+# api:GET获取tag_top列表
 def get_tag(request):
     if request.method == "GET":
         top_num = request.GET.get('top', '')
@@ -207,7 +209,7 @@ def get_tag(request):
         return JsonResponse(json.loads(res_json))
 
 
-# api:获取recommend_top列表
+# api:GET获取recommend_top列表
 def get_recommend(request):
     if request.method == "GET":
         res = {}
@@ -225,7 +227,7 @@ def get_recommend(request):
         return JsonResponse(json.loads(res_json))
 
 
-# api:获取commend_top列表
+# api:GET获取commend_top列表
 def get_comment(request):
     if request.method == "GET":
         res = {}
@@ -251,7 +253,7 @@ def get_comment(request):
         return JsonResponse(json.loads(res_json))
 
 
-# api:获取clipboard_top列表
+# api:GET获取clipboard_top列表
 def get_clipboard(request):
     if request.method == "GET":
         res = {}
@@ -278,7 +280,7 @@ def get_clipboard(request):
         return JsonResponse(json.loads(res_json))
 
 
-# api:获取achieve列表
+# api:GET获取achieve列表
 def get_archive(request):
     if request.method == "GET":
         res = {}
@@ -307,7 +309,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # 跨域 在处理函数加此装饰器即可 @csrf_exempt
-# api:提交admin登录验证
+# api:POST提交admin登录验证
 @csrf_exempt
 def admin_login(request):
     if request.method == "POST":
@@ -320,5 +322,53 @@ def admin_login(request):
         res = {}
         res["data"] = "error"
         res["recode"] = "403"
+        res_json = json.dumps(res)
+        return JsonResponse(json.loads(res_json))
+
+
+# api：POST提交添加一条新的blog记录
+@csrf_exempt
+def add_blog(request):
+    if request.method == "POST":
+        blog_data = request.body.decode()
+        # print(type(request.body),request.body.decode())
+        blog_json_data = json.loads(blog_data)["data"]
+        blog_id=blog_json_data["id"]
+        print(blog_id)
+        res = {}
+        if not blog_id:
+            newBlog=Blog.objects.create(
+                appreciation=blog_json_data["appreciation"],
+                commentabled=blog_json_data["commentabled"],
+                content=blog_json_data["content"],
+                create_time=datetime.datetime.now(),
+                description=blog_json_data["description"],
+                first_picture=blog_json_data["first_picture"],
+                flag=blog_json_data["flag"],
+                published=blog_json_data["published"],
+                recommend=blog_json_data["recommend"],
+                share_statement=blog_json_data["share_statement"],
+                title=blog_json_data["title"],
+                update_time=datetime.datetime.now(),
+                type_id=blog_json_data["type"],
+                user_id=1
+            )
+            res["data"] = {
+                "msg":"succeed to add new blog.",
+                "blogId":str(newBlog.id)
+            }
+        else:
+            print("update")
+            res["data"] = {
+                "msg": "succeed to update the blog.",
+                "blogId": str(blog_id)
+            }
+        res["status"] = "200"
+        res_json = json.dumps(res)
+        return JsonResponse(json.loads(res_json))
+    if request.method == "GET":
+        res = {}
+        res["data"] = "error"
+        res["status"] = "403"
         res_json = json.dumps(res)
         return JsonResponse(json.loads(res_json))

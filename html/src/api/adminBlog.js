@@ -26,5 +26,16 @@ function getBlogById(id) {
     })
 }
 
+function addBlog(data) {
+    return service.request({
+        url: "http://127.0.0.1:82/api/add_blog" ,
+        method:"post",
+        headers: {
+            "Content-type":"application/json"
+        },
+        data: data
+    })
+}
 
-export {getBlogList,getBlogById}
+
+export {getBlogList,getBlogById,addBlog}

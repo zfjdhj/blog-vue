@@ -16,4 +16,5 @@ urlpatterns = [
     path('get_clipboard/', views.get_clipboard),
     path('get_archive/', views.get_archive),
     path('admin_login/', views.admin_login),
+    path('add_blog/', views.add_blog),
 ]

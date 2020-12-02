@@ -21,19 +21,19 @@
                  :class="dropdownLabel" @click="changeShow">
               <input type="hidden" v-model="blogData.data.flag">
                <i class="dropdown icon"></i>
-                <span v-text="blogFlag"></span>
+                <span v-text="blogData.data.flag"></span>
                 <div class="menu" :style="isshow">
-                  <div class="item" data-value="原创" @click="blogFlag='原创'">原创</div>
-                  <div class="item" data-value="转载" @click="blogFlag='转载'">转载</div>
-                  <div class="item" data-value="Tool" @click="blogFlag='Tool'">Tool</div>
-                  <div class="item" data-value="翻译" @click="blogFlag='翻译'">翻译</div>
+                  <div class="item" data-value="原创" @click="blogData.data.flag='原创'">原创</div>
+                  <div class="item" data-value="转载" @click="blogData.data.flag='转载'">转载</div>
+                  <div class="item" data-value="Tool" @click="blogData.data.flag='Tool'">Tool</div>
+                  <div class="item" data-value="翻译" @click="blogData.data.flag='翻译'">翻译</div>
                 </div>
             </div>
-            <input type="text" name="title" placeholder="标题" v-model="blogTitle">
+            <input type="text" name="title" placeholder="标题" v-model="blogData.data.title">
           </div>
         </label>
         <div class="required field">
-          <v-md-editor height="800px" v-model="blogContent" ></v-md-editor>
+          <v-md-editor height="800px" v-model="blogData.data.content" ></v-md-editor>
         </div>
         <div class="two fields">
           <div class="required field">
@@ -43,11 +43,11 @@
                    :class="dropdownLabel" @click="changeShow">
                 <input type="hidden" name="type.id" >
                 <i class="dropdown icon"></i>
-                <div :class="blogType.name ? 'text':'default text'" v-text="blogType.name"></div>
+                <div :class="blogData.data.type_id.name ? 'text':'default text'" v-text="blogData.data.type_id.name"></div>
 <!--                <div class="default text">分类</div>-->
                 <div class="menu" :style="isshow">
                   <div v-for="type in typeList.data.type_item" class="item" :key="type.id" data-value="1"
-                       v-text="type.type_name" @click="blogType.name=type.type_name"></div>
+                       v-text="type.type_name" @click="blogData.data.type_id.name=type.type_name;blogData.data.type_id.id=type.type_id"></div>
                 </div>
               </div>
             </div>
@@ -61,13 +61,13 @@
                 <input type="hidden" name="id" th:value="*{id}">
                 <i class="dropdown icon"></i>
                 <a v-for="tag in blogData.data.tags" :key="tag.id" class="ui label" data-value="5">
-                  <span v-text="tag"></span>
-                  <i class="delete icon" @click="deleteTag"></i>
+                  <span v-text="tag.name"></span>
+                  <i class="delete icon" @click="deleteTag(tag.id,tag.name)"></i>
                 </a>
                 <div class="menu" :style="isshow">
                   <div v-for="tag in tagList.data.tag_item" :key="tag.id" class="item" data-value="1"
                        th:data-value="${tag.id}" v-text="tag.tag_name"
-                       @click="pushTag(tag.tag_name)"></div>
+                       @click="pushTag(tag.tag_id,tag.tag_name)"></div>
                 </div>
               </div>
             </div>
@@ -91,13 +91,15 @@
           <div class="field">
             <label class="ui checkbox">
               <input type="checkbox" id="recommend" name="recommend"
-                     :checked="blogData.data.recommend" class="hidden">
+                     :checked="blogData.data.recommend" v-model="blogData.data.recommend" class="hidden">
               <label for="recommend">推荐</label>
             </label>
           </div>
           <div class="field">
             <label class="ui checkbox">
-              <input type="checkbox" :checked="blogData.data.share_statement" id="shareStatement" name="shareStatement"
+              <input type="checkbox" :checked="blogData.data.share_statement"
+                     v-model="blogData.data.share_statement"
+                     id="shareStatement" name="shareStatement"
                      class="hidden">
               <label for="shareStatement">转载声明</label>
             </label>
@@ -105,6 +107,7 @@
           <div class="field" style="padding-top:5px !important">
             <label class="ui checkbox">
               <input type="checkbox" id="appreciation" name="appreciation"
+                     v-model="blogData.data.appreciation"
                      :checked="blogData.data.appreciation" class="hidden">
               <label class="float" for="appreciation" style="float:left">点赞人数：</label>
               <div id="appreciationCount"
@@ -115,7 +118,7 @@
           <div class="field">
             <label class="ui checkbox">
               <input type="checkbox" id="commentabled" name="commentabled"
-                     :checked="blogData.data.commentabled" class="hidden">
+                     :checked="blogData.data.commentabled" v-model="blogData.data.commentabled" class="hidden">
               <label for="commentabled">评论</label>
             </label>
           </div>
@@ -152,16 +155,12 @@ export default {
   setup(){
     let route=useRoute()
     let router=useRouter()
-    let blogTitle=ref('标题')
-    let blogFlag=ref('原创')
-    let blogContent=ref('正文')
-    let blogTags=reactive()
     let typeList=reactive({data:""})
     let tagList=reactive({data:""})
     let blogData = reactive({data: {
         title:"",
         content:"",
-        type:"",
+        type_id:{id:"",name:""},
         tags:[],
         first_picture:"",
         description:"",
@@ -173,21 +172,14 @@ export default {
       },
     })
     let blog_id= null
-    let blogType=reactive({name:""})
     if (route.path.match(/(\/blogs\/)(.*)(\/input)/)){
       console.log('blog exist');
       blog_id= ref(route.path.match(/(\/blogs\/)(.*)(\/input)/)[2])
       getBlogById(blog_id.value).then(res=>{
-        console.log(res);
         blogData.data=res.data
-        blogFlag.value=res.data.flag
-        blogTitle.value=res.data.title
-        blogContent.value=res.data.content
-        blogType=reactive(res.data.type_id)
-        // console.log(blogContent.value);
+        console.log(blogData.data);
       })
     }else{
-      blogType=reactive({name:''})
       console.log('new blog');
     }
     getTypeList().then(res=>{
@@ -196,20 +188,37 @@ export default {
     })
     getTagList().then(res=>{
       tagList.data=res.data
-      console.log(res);
+      for (let i in blogData.data.tags){
+        tagList.data.tag_item.forEach((item,j)=>{
+          if (blogData.data.tags[i].id === item.tag_id){
+            tagList.data.tag_item.splice(j,1)
+            }
+        })
+      }
     })
-    function pushTag(e){
-      blogData.data.tags.push(e)
-      blogTags=reactive(blogData.data.tags)
+    function pushTag(id,name){
+      console.log("id", id);
+      blogData.data.tags.push({id,name})
+      for (let i in tagList.data.tag_item){
+        console.log(tagList.data.tag_item[i].tag_id);
+        if (tagList.data.tag_item[i].tag_id === id){
+          console.log(i);
+          tagList.data.tag_item.splice(i,1)
+        }
+      }
     }
-    function deleteTag(tagId){
+    function deleteTag(tagId,name){
       console.log(tagId);
+      for (let i in blogData.data.tags){
+        if (blogData.data.tags[i].id === tagId){
+          blogData.data.tags.splice(i,1)
+          tagList.data.tag_item.push({"tag_id":tagId,"tag_name":name})
+        }
+      }
       console.log("deleteTag");
     }
     function save(){
       blogData.data["published"]=false
-      blogData.data["content"]=blogContent.value
-      blogData.data["flag"]=blogFlag.value
       blogData.data["id"]=blog_id
       addBlog(blogData).then(res=>{
         routerLinkTo("/admin/blogs/"+res.data.data.blogId+"/input")
@@ -220,9 +229,7 @@ export default {
       console.log("save", blogData);
     }
     function publish(){
-      blogData.data["published"]=false
-      blogData.data["content"]=blogContent.value
-      blogData.data["flag"]=blogFlag.value
+      blogData.data["published"]=true
       blogData.data["id"]=blog_id
       addBlog(blogData).then(res=>{
         routerLinkTo("/admin/blogs/"+res.data.data.blogId+"/input")
@@ -237,10 +244,6 @@ export default {
     }
     return{
       blogData,
-      blogFlag,
-      blogTitle,
-      blogContent,
-      blogType,
       typeList,
       tagList,
       pushTag,
@@ -256,7 +259,8 @@ export default {
       menu:false,
       isshow:"",
       dropdownLabel:"",
-      showMenu:false
+      showMenu:false,
+      newTag:""
     }
   },
   components: {

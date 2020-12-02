@@ -24,8 +24,8 @@ class DateEncoder(json.JSONEncoder):
 # 获取typeName
 def get_type_name_by_id(param):
     type = Type.objects.filter(id=param).values()
-    return list(type)[0]
-
+    if type:
+        return list(type)[0]
 
 # 获取tagName
 def get_tag_name_by_id(param):
@@ -33,7 +33,8 @@ def get_tag_name_by_id(param):
     res_list = []
     for item in tags:
         # print(item)
-        res_list.append(list(Tag.objects.filter(id=item["tags_id"]).values())[0]["name"])
+        tmp_tag=list(Tag.objects.filter(id=item["tags_id"]).values())[0]
+        res_list.append({"id":tmp_tag["id"],"name":tmp_tag["name"]})
     # print(res_list)
     # print(res)
     return res_list
@@ -194,12 +195,15 @@ def get_tag(request):
                 sort_list[item.id] = len(tmp_list)
                 new_tmp_list = []
                 for item in tmp_list:
-                    tmp = list(Blog.objects.filter(published=True, id=item["blogs_id"]).values())[0]
-                    tmp["content"] = ""
-                    tmp["user_id"] = get_user_name_by_id(tmp["user_id"])
-                    tmp["type_id"] = get_type_name_by_id(tmp["type_id"])
-                    tmp["tags"] = get_tag_name_by_id(tmp["id"])
-                    new_tmp_list.append(tmp)
+                    try:
+                        tmp=list(Blog.objects.filter(published=True, id=item["blogs_id"]).values())[0]
+                        tmp["content"] = ""
+                        tmp["user_id"] = get_user_name_by_id(tmp["user_id"])
+                        tmp["type_id"] = get_type_name_by_id(tmp["type_id"])
+                        tmp["tags"] = get_tag_name_by_id(tmp["id"])
+                        new_tmp_list.append(tmp)
+                    except Exception as error:
+                        new_tmp_list.append(str(error))
                 tmp_item["blog_list"] = new_tmp_list
                 tag_item.append(tmp_item)
                 res["tag_item"] = tag_item
@@ -334,9 +338,9 @@ def add_blog(request):
         # print(type(request.body),request.body.decode())
         blog_json_data = json.loads(blog_data)["data"]
         blog_id=blog_json_data["id"]
-        print(blog_id)
         res = {}
         if not blog_id:
+            # 创建新的blog数据
             newBlog=Blog.objects.create(
                 appreciation=blog_json_data["appreciation"],
                 commentabled=blog_json_data["commentabled"],
@@ -350,15 +354,42 @@ def add_blog(request):
                 share_statement=blog_json_data["share_statement"],
                 title=blog_json_data["title"],
                 update_time=datetime.datetime.now(),
-                type_id=blog_json_data["type"],
+                type_id=blog_json_data["type_id"]["id"],
                 user_id=1
             )
+            # 添加tags
+            tags=blog_json_data["tags"]
+            for item in tags:
+                print("tag_id",item["id"])
             res["data"] = {
                 "msg":"succeed to add new blog.",
                 "blogId":str(newBlog.id)
             }
-        else:
-            print("update")
+        elif blog_id:
+            tmp_blog=Blog.objects.get(id=blog_id)
+            tmp_blog.appreciation = blog_json_data["appreciation"]
+            tmp_blog.commentabled = blog_json_data["commentabled"]
+            tmp_blog.content = blog_json_data["content"]
+            tmp_blog.description = blog_json_data["description"]
+            tmp_blog.first_picture = blog_json_data["first_picture"]
+            tmp_blog.flag = blog_json_data["flag"]
+            print("before",tmp_blog.published)
+            tmp_blog.published = blog_json_data["published"]
+            print("after", tmp_blog.published)
+            tmp_blog.recommend = blog_json_data["recommend"]
+            tmp_blog.share_statement = blog_json_data["share_statement"]
+            tmp_blog.title = blog_json_data["title"]
+            tmp_blog.update_time = datetime.datetime.now()
+            tmp_blog.type_id = blog_json_data["type_id"]["id"]
+            tmp_blog.user_id = 1
+            tmp_blog.save()
+            # 添加tags
+            tags = blog_json_data["tags"]
+            tmp_blog = Blog.objects.get(id=blog_id)
+            for item in tags:
+                tag_item=Tag.objects.get(id=item["id"])
+                BlogTags(blogs=tmp_blog,tags=tag_item).save()
+                print("tag_id", item["id"])
             res["data"] = {
                 "msg": "succeed to update the blog.",
                 "blogId": str(blog_id)

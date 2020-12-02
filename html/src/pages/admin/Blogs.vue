@@ -48,7 +48,8 @@
             </label>
           </div>
           <div class="field">
-            <button type="button" id="search-btn" class="ui mini teal basic custom-padded button "><i class="search icon"></i>搜索</button>
+            <button type="button" id="search-btn" class="ui mini teal basic custom-padded button ">
+              <i class="search icon"></i>搜索</button>
           </div>
         </div>
       </div>
@@ -118,14 +119,24 @@ import {getBlogList} from "@/api/adminBlog"
 export default {
 name: "Blogs",
   setup(){
-    let blogListData=reactive({data:""})
+    let blogListData=reactive({
+      data: {
+        list:[
+          {
+            type_id:{
+              name: "type_name",
+            }
+          }]
+        }
+    })
     getBlogList().then(res=>{
       blogListData.data=res.data
+
       // console.log("page",blogListData.data.page)
       console.log(blogListData.data);
     })
     return{
-      blogListData
+      blogListData,
     }
   },
   components:{

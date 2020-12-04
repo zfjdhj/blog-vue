@@ -50,7 +50,7 @@
                 <div class="row custom-padded-tb-tiny">
                   <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui basic left pointing label custom-text-thin custom-padded-mini"
                      th:classappend="${tag.id==activeTagId} ? 'teal'"
-                     v-for="tag in blog.tags" :key="tag.id" v-text="tag"></a>
+                     v-for="tag in blog.tags" :key="tag.id" v-text="tag.name"></a>
                 </div>
               </div>
             </div>
@@ -91,7 +91,7 @@ name: "temTags",
     console.log("path",route.path);
     let tagData = reactive({data: ""})
     let id = ref(route.path.slice(6))
-    let blogListData = reactive({data: ""})
+    let blogListData = reactive({data:[{type_id:{name:""}}]})
     getTagTop().then(res => {
       res.data.type_item = sortByKey(res.data.tag_item, 'blog_total')
       tagData.data = res.data

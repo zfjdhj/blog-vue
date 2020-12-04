@@ -45,7 +45,7 @@
                 </div>
                 <div class="row custom-padded-tb-tiny">
                   <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui basic left pointing label custom-text-thin custom-padded-mini"
-                     th:each="tag : ${blog.tags}" v-for="tag in blog.tags" :key="tag.id" v-text="tag"></a>
+                     th:each="tag : ${blog.tags}" v-for="tag in blog.tags" :key="tag.id" v-text="tag.name"></a>
                 </div>
               </div>
             </div>

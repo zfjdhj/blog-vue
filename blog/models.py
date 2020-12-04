@@ -18,9 +18,9 @@ class Blog(models.Model):
     description = models.CharField(max_length=255, blank=True, null=True)
     first_picture = models.CharField(max_length=255, blank=True, null=True)
     flag = models.CharField(max_length=255, blank=True, null=True)
-    published = models.BooleanField()  # This field type is a guess.
-    recommend = models.BooleanField()  # This field type is a guess.
-    share_statement = models.BooleanField()  # This field type is a guess.
+    published = models.BooleanField()
+    recommend = models.BooleanField()
+    share_statement = models.BooleanField()
     title = models.CharField(max_length=255, blank=True, null=True)
     update_time = models.DateTimeField(blank=True, null=True)
     views = models.IntegerField(blank=True, null=True)
@@ -30,6 +30,20 @@ class Blog(models.Model):
     class Meta:
         db_table = 't_blog'
 
+    def __int__(self):
+        return self.id
+
+
+class Tag(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        db_table = 't_tag'
+
+    def __int__(self):
+        return self.id
+
 
 class BlogTags(models.Model):
     id = models.AutoField(primary_key=True)
@@ -38,6 +52,9 @@ class BlogTags(models.Model):
 
     class Meta:
         db_table = 't_blog_tags'
+
+    def __int__(self):
+        return self.id
 
 
 class Clipboard(models.Model):
@@ -50,6 +67,9 @@ class Clipboard(models.Model):
 
     class Meta:
         db_table = 't_clipboard'
+
+    def __int__(self):
+        return self.id
 
 
 class Comment(models.Model):
@@ -66,13 +86,8 @@ class Comment(models.Model):
     class Meta:
         db_table = 't_comment'
 
-
-class Tag(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        db_table = 't_tag'
+    def __int__(self):
+        return self.id
 
 
 class Type(models.Model):
@@ -81,6 +96,9 @@ class Type(models.Model):
 
     class Meta:
         db_table = 't_type'
+
+    def __int__(self):
+        return self.id
 
 
 class User(models.Model):
@@ -96,3 +114,6 @@ class User(models.Model):
 
     class Meta:
         db_table = 't_user'
+
+    def __int__(self):
+        return self.id

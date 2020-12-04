@@ -38,7 +38,7 @@
               </div>
               <div class="row custom-padded-tb-tiny">
                 <a v-for="tag in blog.tags" :key="tag.id" href="#" class="ui basic left pointing label custom-text-thin custom-padded-mini"
-                   v-text="tag"></a>
+                   v-text="tag.name"></a>
               </div>
             </div>
           </div>

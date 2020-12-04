@@ -31,10 +31,11 @@ def get_type_name_by_id(param):
 def get_tag_name_by_id(param):
     tags = list(BlogTags.objects.filter(blogs=param).values())
     res_list = []
-    for item in tags:
-        # print(item)
-        tmp_tag=list(Tag.objects.filter(id=item["tags_id"]).values())[0]
-        res_list.append({"id":tmp_tag["id"],"name":tmp_tag["name"]})
+    if tags:
+        for item in tags:
+            # print(item)
+            tmp_tag=list(Tag.objects.filter(id=item["tags_id"]).values())[0]
+            res_list.append({"id":tmp_tag["id"],"name":tmp_tag["name"]})
     # print(res_list)
     # print(res)
     return res_list
@@ -68,6 +69,7 @@ def get_blog(request):
                 res["page"] = "all"
                 res["list"] = new_list_blog
             elif page == "admin":
+                new_list_blog=[]
                 blog = Blog.objects.all().order_by('-update_time').values()
                 for item in list(blog):
                     item.pop("content")
@@ -137,15 +139,16 @@ def get_type(request):
                 tmp_item["blog_total"] = len(tmp_list)
                 sort_list[item.id] = len(tmp_list)
                 new_tmp_list = []
-                for item2 in tmp_list:
-                    item2.pop("content")
-                    item2["user_id"] = get_user_name_by_id(item2["user_id"])
-                    item2["type_id"] = get_type_name_by_id(item2["type_id"])
-                    item2["tags"] = get_tag_name_by_id(item2["id"])
-                    new_tmp_list.append(item2)
-                tmp_item["blog_list"] = new_tmp_list
-                type_item.append(tmp_item)
-                res["type_item"] = type_item
+                if tmp_list:
+                    for item2 in tmp_list:
+                        item2.pop("content")
+                        item2["user_id"] = get_user_name_by_id(item2["user_id"])
+                        item2["type_id"] = get_type_name_by_id(item2["type_id"])
+                        item2["tags"] = get_tag_name_by_id(item2["id"])
+                        new_tmp_list.append(item2)
+                    tmp_item["blog_list"] = new_tmp_list
+                    type_item.append(tmp_item)
+                    res["type_item"] = type_item
         res_json = json.dumps(res, cls=DateEncoder)
         return JsonResponse(json.loads(res_json))
 
@@ -194,14 +197,17 @@ def get_tag(request):
                 tmp_item["blog_total"] = len(tmp_list)
                 sort_list[item.id] = len(tmp_list)
                 new_tmp_list = []
+                tmp_blog_list=[]
                 for item in tmp_list:
                     try:
-                        tmp=list(Blog.objects.filter(published=True, id=item["blogs_id"]).values())[0]
-                        tmp["content"] = ""
-                        tmp["user_id"] = get_user_name_by_id(tmp["user_id"])
-                        tmp["type_id"] = get_type_name_by_id(tmp["type_id"])
-                        tmp["tags"] = get_tag_name_by_id(tmp["id"])
-                        new_tmp_list.append(tmp)
+                        tmp_blog_list=list(Blog.objects.filter(published=True, id=item["blogs_id"]).values())
+                        if tmp_blog_list:
+                            tmp =tmp_blog_list[0]
+                            tmp["content"] = ""
+                            tmp["user_id"] = get_user_name_by_id(tmp["user_id"])
+                            tmp["type_id"] = get_type_name_by_id(tmp["type_id"])
+                            tmp["tags"] = get_tag_name_by_id(tmp["id"])
+                            new_tmp_list.append(tmp)
                     except Exception as error:
                         new_tmp_list.append(str(error))
                 tmp_item["blog_list"] = new_tmp_list
@@ -338,6 +344,7 @@ def add_blog(request):
         # print(type(request.body),request.body.decode())
         blog_json_data = json.loads(blog_data)["data"]
         blog_id=blog_json_data["id"]
+
         res = {}
         if not blog_id:
             # 创建新的blog数据
@@ -357,10 +364,18 @@ def add_blog(request):
                 type_id=blog_json_data["type_id"]["id"],
                 user_id=1
             )
+            # 删除原有tag
+            tmp_blog = Blog.objects.get(id=newBlog.id)
+            tags_item=BlogTags.objects.filter(blogs_id=newBlog.id)
+            for item in tags_item:
+                item.delete()
             # 添加tags
-            tags=blog_json_data["tags"]
+            tags = blog_json_data["tags"]
             for item in tags:
-                print("tag_id",item["id"])
+                tag_item=Tag.objects.get(id=item["id"])
+                BlogTags(blogs=tmp_blog,tags=tag_item).save()
+                print("tag_id", item["id"])
+
             res["data"] = {
                 "msg":"succeed to add new blog.",
                 "blogId":str(newBlog.id)
@@ -383,13 +398,20 @@ def add_blog(request):
             tmp_blog.type_id = blog_json_data["type_id"]["id"]
             tmp_blog.user_id = 1
             tmp_blog.save()
+            # 删除原有tag
+            tmp_blog = Blog.objects.get(id=tmp_blog.id)
+            tags_item = BlogTags.objects.filter(blogs_id=tmp_blog.id)
+            for item in tags_item:
+                item.delete()
             # 添加tags
             tags = blog_json_data["tags"]
             tmp_blog = Blog.objects.get(id=blog_id)
             for item in tags:
                 tag_item=Tag.objects.get(id=item["id"])
+
                 BlogTags(blogs=tmp_blog,tags=tag_item).save()
                 print("tag_id", item["id"])
+
             res["data"] = {
                 "msg": "succeed to update the blog.",
                 "blogId": str(blog_id)
@@ -401,5 +423,24 @@ def add_blog(request):
         res = {}
         res["data"] = "error"
         res["status"] = "403"
+        res_json = json.dumps(res)
+        return JsonResponse(json.loads(res_json))
+
+
+def test(request):
+    if request.method == "POST":
+        res = {}
+        res["data"] = "succeed"
+        res["recode"] = "200"
+        res_json = json.dumps(res)
+        return JsonResponse(json.loads(res_json))
+    if request.method == "GET":
+        tags_item = BlogTags.objects.filter(blogs_id=66)
+        for item in tags_item:
+            print(item.tags)
+        print(list(tags_item))
+        res = {}
+        res["data"] = "error"
+        res["recode"] = "403"
         res_json = json.dumps(res)
         return JsonResponse(json.loads(res_json))

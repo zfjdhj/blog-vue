@@ -17,12 +17,12 @@
     <div v-for="blog in blogListData.data.list" :key="blog.id" class="ui attached segment">
       <div class="ui custom-padded vertical segment custom-padded-tb-large" >
         <div class="ui middle aligned mobile reversed stackable grid">
-          <div style="" class="eleven wide column" >
+          <div style=""  :class="blog.first_picture !== 'null' ? 'eleven wide column':' sixteen wide column'">
             <h3 class="ui header"><router-link :to="{path:'/blog/'+blog.id}" class="custom-black" v-text="blog.title"></router-link></h3>
             <p class="custom-text" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;" v-text="blog.description"></p>
             <div class="ui stackable grid">
               <div class="row ">
-                <div class="eleven wide column">
+                <div class="eleven wide column" >
                   <div class="ui mini horizontal link list">
                     <div class="item">
                       <img src="../../static/images/icon.png" alt="" class="ui avatar image">
@@ -33,7 +33,8 @@
                   </div>
                 </div>
                 <div class="right aligned five wide column">
-                  <a href="#" target="_balnk" class="ui teal basic label custom-padded-tiny custom-text-thin" v-text="blog.type_id.name"></a>
+                  <a href="#" target="_balnk" class="ui teal basic label custom-padded-tiny custom-text-thin"
+                     v-text="blog.type_id.name"></a>
                 </div>
               </div>
               <div class="row custom-padded-tb-tiny">
@@ -42,7 +43,7 @@
               </div>
             </div>
           </div>
-          <div class="five wide column">
+          <div class="five wide column" v-if="blog.first_picture !== 'null'">
             <a href="#" target="_blank" >
 <!--              <p>{{blog.first_picture}}</p>-->
               <img :src="'/static/' + blog.first_picture" class="ui rounded image custom-image8x5"  alt="" >

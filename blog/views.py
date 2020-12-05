@@ -155,6 +155,7 @@ def get_type(request):
 
 # api:GET获取tag_top列表
 def get_tag(request):
+    start = time.time()
     if request.method == "GET":
         top_num = request.GET.get('top', '')
         res = {}
@@ -173,11 +174,12 @@ def get_tag(request):
                 sort_list[item.id] = len(tmp_list)
                 new_tmp_list = []
                 for item2 in tmp_list:
-                    tmp = \
-                        list(Blog.objects.filter(published=True, id=item2["blogs_id"]).order_by(
+                    if list(Blog.objects.filter(published=True, id=item2["blogs_id"]).order_by(
+                            '-update_time').values()):
+                        tmp=list(Blog.objects.filter(published=True, id=item2["blogs_id"]).order_by(
                             '-update_time').values())[0]
-                    tmp["content"] = ""
-                    new_tmp_list.append(tmp)
+                        tmp["content"] = ""
+                        new_tmp_list.append(tmp)
                 tmp_item["blog_list"] = new_tmp_list
                 tag_item.append(tmp_item)
             new_sort = sorted(sort_list.items(), key=lambda x: x[1], reverse=True)
@@ -213,6 +215,8 @@ def get_tag(request):
                 tmp_item["blog_list"] = new_tmp_list
                 tag_item.append(tmp_item)
                 res["tag_item"] = tag_item
+        end = time.time()
+        res["elapsed_time"]=end - start
         res_json = json.dumps(res, cls=DateEncoder)
         # print(res["tag_item"][3]["blog_list"][0]["update_time"])
         # print(res["tag_item"][3]["blog_list"][1]["update_time"])

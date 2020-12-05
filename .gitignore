@@ -1,15 +1,15 @@
 # Project exclude paths
-/venv/
-/zfjsite/settings.py
+!/venv/
+!/zfjsite/settings.py
 /dist/
-/html/.env.development
-/blog/migrations/
-blog/__pycache__/
-blog/migrations/__pycache__/
+!/html/.env.development
+!/blog/migrations/
+!blog/__pycache__/
+!blog/migrations/__pycache__/
 html/src/CompositionApi/
 html/src/static/
 html/static/aspnet_client/
 html/static/images/blogPicture/
 html/static/images/commentPicture/
 html/static/uploadTmp/
-zfjsite/__pycache__/
+!zfjsite/__pycache__/

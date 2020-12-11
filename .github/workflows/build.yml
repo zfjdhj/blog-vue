@@ -42,6 +42,6 @@ jobs:
           # branch：分支名称
           branch: master
           # source_folder：要上传的文件，这里是vue编译后的文件夹
-          source_folder: dist
+          source_folder: html/dist
           # github_token：上一步骤中生成的token
           github_token: ${{ secrets.SECRET_TOKEN }}

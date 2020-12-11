@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Install and Build
+        run: |
+          cd html
+          npm install
+          npm run-script build
+          ls
+          
+      # 发布build后的文件，当前所用轮子uses：xxxxxxxx
+      - name: publish
+        uses: seanmiddleditch/gha-publish-to-git@master
+        with:
+          # 简单参数说明，轮子介绍页都有的
+          # repository：仓库名称
+          repository: zfjdhj/zfjdhj.github.io
+          # target_folder：目标文件夹
+          target_folder: blog-vue
+          # branch：分支名称
+          branch: master
+          # source_folder：要上传的文件，这里是vue编译后的文件夹
+          source_folder: dist
+          # github_token：上一步骤中生成的token
+          github_token: ${{ secrets.SECRET_TOKEN }}

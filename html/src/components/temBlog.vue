@@ -5,21 +5,6 @@
 
 <template>
   <!--中间内容-->
-<!--  <div>-->
-    <pre style="height: 77%;padding-left: 0;">
-    <code class="language-java">
-      server:
-    #https监听端口
-    port: 443
-    #http监听端口
-    httpPort: 80
-    ssl:
-        key-store: classpath:xxx.jks
-        key-store-password: #证书密码
-        key-store-type: JKS
-        key-alias: #证书别名</code>
-  </pre>
-<!--  </div>-->
   <div class="custom-container-small custom-padded-tb-big">
     <div class="ui container">
       <div class="ui top attached segment">

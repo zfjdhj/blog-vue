@@ -29,12 +29,6 @@ export default {
   },
   components:{
   },
-  methods:{
-    toggle(){
-      this.isShow=!this.isShow
-      this.switchShow=this.switchShow === "test" ? "test2" : "test";
-    },
-  }
 }
 </script>
 

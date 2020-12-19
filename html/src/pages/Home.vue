@@ -18,6 +18,8 @@
       </div>
     </div>
 <!--</keep-alive>-->
+    <canvas id="live2d" width="500" height="500" 
+    style="position: fixed; opacity: 1; left: -220px; bottom: -132px; z-index: 99999; pointer-events: none;"></canvas>
     <wbc-footer></wbc-footer>
   </div>
 </template>
@@ -27,11 +29,18 @@ import header from '../components/header.vue'
 import footer from '../components/footer.vue'
 import temBloglist from '../components/temBloglist.vue'
 import temRightlist from '../components/temRightlist.vue'
-import LoginVue from './admin/Login.vue'
 export default {
   name: "Home",
   mounted() {
     console.log("loading...")
+    this.$nextTick(()=>{
+      if(window.initLive2D){
+        var resourcePath='/live2d/model/';
+        var backimageName='';
+        var modelDir=['Rice'];
+        window.initLive2D(resourcePath,backimageName,modelDir);
+      }
+    })
   },
   components: { //定义组件
     'wbc-nav':header,

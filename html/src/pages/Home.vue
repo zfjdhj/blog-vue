@@ -2,7 +2,8 @@
 <template>
   <div>
     <wbc-nav></wbc-nav>
-<!--    <keep-alive>-->
+    
+<!--<keep-alive>-->
     <div class="custom-container custom-padded-tb-big">
       <div class="ui container">
         <div class="ui stackable grid">
@@ -16,7 +17,7 @@
         </div>
       </div>
     </div>
-<!--    </keep-alive>-->
+<!--</keep-alive>-->
     <wbc-footer></wbc-footer>
   </div>
 </template>
@@ -26,9 +27,11 @@ import header from '../components/header.vue'
 import footer from '../components/footer.vue'
 import temBloglist from '../components/temBloglist.vue'
 import temRightlist from '../components/temRightlist.vue'
+import LoginVue from './admin/Login.vue'
 export default {
   name: "Home",
   mounted() {
+    console.log("loading...")
   },
   components: { //定义组件
     'wbc-nav':header,

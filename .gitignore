@@ -1,6 +1,6 @@
 # Project exclude paths
 !/venv/
-!/zfjsite/settings.py
+/zfjsite/settings.py
 /dist/
 !/html/.env.development
 !/blog/migrations/
@@ -13,3 +13,4 @@ html/static/images/blogPicture/
 html/static/images/commentPicture/
 html/static/uploadTmp/
 !zfjsite/__pycache__/
+

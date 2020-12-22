@@ -2,8 +2,6 @@
 <template>
   <div>
     <wbc-nav></wbc-nav>
-    
-<!--<keep-alive>-->
     <div class="custom-container custom-padded-tb-big">
       <div class="ui container">
         <div class="ui stackable grid">
@@ -17,7 +15,6 @@
         </div>
       </div>
     </div>
-<!--</keep-alive>-->
     <canvas id="live2d" width="500" height="500" 
     style="position: fixed; opacity: 1; left: -220px; bottom: -132px; z-index: 99999; pointer-events: none;"></canvas>
     <wbc-footer></wbc-footer>
@@ -32,7 +29,7 @@ import temRightlist from '../components/temRightlist.vue'
 export default {
   name: "Home",
   mounted() {
-    console.log("loading...")
+    console.log("live2d loading...")
     this.$nextTick(()=>{
       if(window.initLive2D){
         var resourcePath='/live2d/model/';

@@ -1,6 +1,6 @@
 <template>
-  <!--Left-->
-<!--  <div class="eleven wide column">-->
+  <div>
+    <!--Left-->
     <!--header-->
     <div class="ui top attached segment">
       <div class="ui middle aligned two column grid">
@@ -12,7 +12,6 @@
         </div>
       </div>
     </div>
-<!--  <p>{{mode}}&#45;&#45;{{page}}&#45;&#45;{{blogListData.data.total}}</p>-->
     <!--content-->
     <div v-for="blog in blogListData.data.list" :key="blog.id" class="ui attached segment">
       <div class="ui custom-padded vertical segment custom-padded-tb-large" >
@@ -34,19 +33,18 @@
                 </div>
                 <div class="right aligned five wide column">
                   <a href="#" target="_balnk" class="ui teal basic label custom-padded-tiny custom-text-thin"
-                     v-text="blog.type_id.name"></a>
+                      v-text="blog.type_id.name"></a>
                 </div>
               </div>
               <div class="row custom-padded-tb-tiny">
                 <a v-for="tag in blog.tags" :key="tag.id" href="#" class="ui basic left pointing label custom-text-thin custom-padded-mini"
-                   v-text="tag.name"></a>
+                    v-text="tag.name"></a>
               </div>
             </div>
           </div>
           <div class="five wide column" v-if="blog.first_picture !== 'null'">
             <a href="#" target="_blank" >
-<!--              <p>{{blog.first_picture}}</p>-->
-              <img :src="'/static/' + blog.first_picture" class="ui rounded image custom-image8x5"  alt="" >
+              <img :src="blog.first_picture" class="ui rounded image custom-image8x5"  alt="" >
             </a>
           </div>
         </div>
@@ -57,21 +55,19 @@
       <div class="ui middle aligned two column grid">
         <div class="column">
           <router-link :to="{path:'/home',query:{page:page-1}}"
-                       class="ui teal basic mini button"
-                       v-show="page>1"
-                       >上一页</router-link>
+                        class="ui teal basic mini button"
+                        v-show="page>1"
+                        >上一页</router-link>
         </div>
-<!--        <p>{{page}}</p>-->
         <div class="right aligned column">
           <router-link :to="{path:'/home',query:{page:page+1}}"
-                       class="ui teal basic mini button"
-                       v-show="page*10 < blogListData.data.total"
+                        class="ui teal basic mini button"
+                        v-show="page*10 < blogListData.data.total"
                         >下一页</router-link>
-<!--          <button @click="test">test</button>-->
         </div>
       </div>
     </div>
-<!--  </div>-->
+  </div>
 </template>
 
 <script>

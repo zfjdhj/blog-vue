@@ -40,7 +40,7 @@
         当前在线人数：<span id="onlineCount" >null</span>
       </div>
       <div class="custom-opacity-mini">
-        互联网ICP备案：<a href="http://www.beian.miit.gov.cn/" target="_blank">豫ICP备19031358号-1</a>
+        互联网ICP备案：<a href="http://beian.miit.gov.cn/" target="_blank">豫ICP备19031358号-1</a>
       </div>
     </div>
   </footer>
